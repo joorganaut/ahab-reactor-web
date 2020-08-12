@@ -1,4 +1,4 @@
-import { Model } from "../IModel"
+import { Model } from "../iModel"
 
 export default class CustomerModel extends Model{
     FirstName: string;

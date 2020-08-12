@@ -1,4 +1,4 @@
-import {Response} from '../IHttpObject'
+import {Response} from '../iHttpObject'
 class AddCustomerResponse extends Response{
     constructor(props: any){
         super();

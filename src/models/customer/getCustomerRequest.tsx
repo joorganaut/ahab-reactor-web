@@ -1,4 +1,4 @@
-import {Request} from '../IHttpObject'
+import {Request} from '../iHttpObject'
 class GetCustomerRequest extends Request{
     constructor(id?: number){
         super();
