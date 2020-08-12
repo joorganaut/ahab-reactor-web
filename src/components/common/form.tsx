@@ -1,8 +1,8 @@
 import React from 'react';
-import IModel, { IViewModel }  from '../../models/IModel';
-import BaseProp from '../../models/contracts/BaseProp';
-import BaseState from '../../models/contracts/BaseState';
-import { IRequest } from '../../models/IHttpObject';
+import IModel, { IViewModel }  from '../../models/iModel';
+import BaseProp from '../../models/contracts/baseProp';
+import BaseState from '../../models/contracts/baseState';
+import { IRequest } from '../../models/iHttpObject';
 interface FormProp extends BaseProp{
     Model: IModel;
     ViewModel: IViewModel;
