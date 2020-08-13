@@ -7,7 +7,8 @@ export default class CustomerViewModel extends ViewModel {
     constructor(props: CustomerModel) {
         super(props);
         this.ID = props.ID;
-        this.Manager<GetCustomerRequest, GetCustomerResponse>().GetData(new GetCustomerRequest(this.ID)).then(response => {
+        this.Manager().GetData(new GetCustomerRequest(this.ID)).then(res => {
+            let response: GetCustomerResponse = new GetCustomerResponse(res);
             if (!ViewModel.IsNullOrUndefined(response) && !ViewModel.IsNullOrUndefined(response.Model)) {
                 if (response.Code === '00') {                    
                     let records = (response.Model as CustomerModel[]);

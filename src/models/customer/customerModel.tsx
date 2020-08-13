@@ -1,17 +1,25 @@
 import { Model } from "../iModel"
-
+import AddressModel from './addressModel'
 export default class CustomerModel extends Model{
     FirstName: string;
     LastName: string;
     Email: string;
     PhoneNumber: string;
     Gender: string;
-    constructor(model: any){
-        super(model.ID);
-        this.FirstName = model.FirstName;
-        this.LastName = model.LastName;
-        this.Email = model.Email;
-        this.PhoneNumber = model.PhoneNumber;
-        this.Gender = model.Gender;
+    OtherName: string;
+    DateOfBirth: Date;
+    BVN: string;
+    Address: AddressModel;
+    constructor(props?: any){
+        super(props);
+        this.FirstName = props === undefined ? '' :  props.FirstName;
+        this.LastName = props === undefined ? '' :  props.LastName;
+        this.OtherName = props === undefined ? '' :  props.OtherName;
+        this.PhoneNumber = props === undefined ? '' :  props.PhoneNumber;
+        this.Email = props === undefined ? '' :  props.Email;
+        this.Gender = props === undefined ? 0 :  props.Gender;
+        this.DateOfBirth = props === undefined ? new Date() :  props.DateOfBirth;
+        this.BVN = props === undefined ? '' :  props.BVN;
+        this.Address = props === undefined ? new AddressModel() :  props.Address;
     }
 }

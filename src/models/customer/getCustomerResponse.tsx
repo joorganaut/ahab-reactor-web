@@ -1,11 +1,10 @@
-import {Response} from '../iHttpObject'
+import { Response } from '../iHttpObject';
+import CustomerModel from './customerModel';
 class GetCustomerResponse extends Response{
+    CustomerModel: CustomerModel;
     constructor(props: any){
-        super();
-        this.Code = props === undefined ? '' : props.Code;
-        this.Model = props === undefined ? {} : props.Model;
-        this.Error = props === undefined ? '' : props.Error;
-        this.Message = props === undefined ? '' : props.Message;
+        super(props);
+        this.CustomerModel = props === undefined ? new CustomerModel() : props.CustomerModel;
     }
 }
 export default GetCustomerResponse;

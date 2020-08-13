@@ -1,6 +1,6 @@
 import Axios from 'axios';
-import { IRequest, IResponse } from '../models/iHttpObject';
-export default function MiddlewareManager<T extends IRequest, U extends IResponse>() {
+import { IRequest as T, IResponse as U} from '../models/iHttpObject';
+export default function MiddlewareManager() {
     return {
         PostData: async (request: T): Promise<U> => {
             let result: U;
