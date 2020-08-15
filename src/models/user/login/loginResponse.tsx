@@ -17,6 +17,12 @@ class LoginResponse extends Response implements IResponse{
         this.CustomerModel = props === undefined ? new CustomerModel() : props.CustomerModel;
         this.AccountModels = props === undefined ? [] : props.AccountModels;
         this.Error = props === undefined ? '' : props.Error;
+        this.RedirectParams = {
+            InstitutionModel : this.InstitutionModel,
+            UserModel : this.UserModel,
+            CustomerModel : this.CustomerModel,
+            AccountModels : this.AccountModels
+        };
     }
 }
 export default LoginResponse;

@@ -14,7 +14,8 @@ export interface IResponse extends IHttpObject{
     Model?: IModel[];
     Redirect?: boolean;
     RedirectPath?: string;
-    Code: any;
+    RedirectParams?: any;
+    Code: string;
     Message: string;
     Error?: string;
 }
@@ -43,6 +44,7 @@ export class Response implements IResponse{
     }
     Redirect?: boolean;
     RedirectPath?: string;
+    RedirectParams?: any;
     async ToObject(value: string): Promise<IResponse> {
         return await new Promise(()=>{ JSON.parse(value)});
     }

@@ -6,7 +6,7 @@ class LoginRequest extends Request implements IRequest{
         this.Model = [];
         this.Model.push(props);
         this.Url = process.env.REACT_APP_MIDDLEWARE;
-        this.Method = '/api​/MobileMiddleware​/Authentication​/Login';
+        this.Method = ('/api​/MobileMiddleware​/Authentication​/Login').replace(/[^\x00-\xFF]/g, '');
     }
 }
 export default LoginRequest;

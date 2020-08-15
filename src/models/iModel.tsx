@@ -12,27 +12,29 @@ export default interface IModel {
 }
 export interface IModelAttribute {
     FieldName?: string;
-    Type?: string;
-    Value: string;
+    Type?: 'text' | 'select' | 'password' | 'email' | 'button';
+    Value: any;
     Inputs?: any;
 }
 
 export interface IViewModel {
-    Model: IModel;
-    Error: any;
+    Model?: IModel;
+    Error?: any;
+    Manager?: MiddlewareManager
     SubmitAction(request?: IRequest): Promise<IResponse | void>;
 }
 export class ViewModel extends BaseProcessor implements IViewModel {
-    Model: IModel;
-    constructor(model: IModel) {
+    Model?: IModel;
+    constructor(model?: IModel) {
         super();
         this.Model = model;
+        this.Manager = new MiddlewareManager();
     }
     SubmitAction(request?: IRequest): Promise<IResponse | void> {
         throw new Error("Method not implemented.");
     }
-    Error: IModelAttribute = { FieldName: 'Error', Type: 'label', Value: '' };
-    Manager!: typeof MiddlewareManager
+    Error: IModelAttribute = { FieldName: 'Error', Type: 'text', Value: '' };
+    Manager: MiddlewareManager;
 }
 export class Model implements IModel {
     ID?: number;

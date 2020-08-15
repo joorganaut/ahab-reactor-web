@@ -11,7 +11,7 @@ export default class AddCustomerViewModel extends ViewModel {
         this.PhoneNumber.Value = model.PhoneNumber;
         this.Gender.Value = model.Gender;
     }
-    Error: IModelAttribute = { FieldName: 'Error', Type: 'label', Value: '' };
+    Error: IModelAttribute = { FieldName: 'Error', Type: 'text', Value: '' };
     ID: number = 0;
     FirstName: IModelAttribute = { FieldName: "First Name", Type: "text", Value: '' };
     LastName: IModelAttribute = { FieldName: "Last Name", Type: "text", Value: '' };
@@ -19,7 +19,7 @@ export default class AddCustomerViewModel extends ViewModel {
     PhoneNumber: IModelAttribute = { FieldName: "Phone Number", Type: "text", Value: '' };
     Gender: IModelAttribute = { FieldName: "Gender", Type: "select", Value: '', Inputs: ['Male', 'Female'] };
     async SubmitAction<T extends IRequest, U extends IResponse>(request: T) : Promise<U>{
-        let response = await this.Manager().PostData(request);
+        let response = await this.Manager.PostData(request);
         if (!ViewModel.IsNullOrUndefined(response)) {
             if (response.Code === '00') {
                 //figure out what you want to do here

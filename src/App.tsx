@@ -1,12 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Form from './components/common/form';
-import LoginViewModel from './models/user/login/loginViewModel';
-import LoginModel from './models/user/login/loginModel';
+// import './App.css';
+import { ThemeProvider } from 'styled-components/macro';
+import { theme, GlobalStyle } from './styles/global';
+import { Router } from './routes'
 function App() {
   return (
-    <Form Model={{}} ViewModel={new LoginViewModel(new LoginModel())}></Form>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+        <Router />
+    </ThemeProvider>
   );
 }
 

@@ -1,46 +1,48 @@
-import Axios from 'axios';
+import axios from 'axios';
 import { IRequest as T, IResponse as U} from '../models/iHttpObject';
-export default function MiddlewareManager() {
-    return {
-        PostData: async (request: T): Promise<U> => {
+export default class MiddlewareManager {
+        PostData = async (request: T): Promise<U> => {
             let result: U;
             result = {} as U;
             try {
-                result = await Axios.post(request.Url === undefined ? '' : request.Url + request.Method, request.Model);
+                await axios.post(request.Url === undefined ? '' : request.Url + request.Method, (request.Model ? request.Model.length <= 1 ? request.Model[0] : request.Model : {})).then(r=>{
+                    result = r.data;
+                });
             } catch (e) {
                 result.Error = e.message;
-            }
-            return result;
-        },
-        PutData: async (request: T): Promise<U> => {
-            let result: U;
-            result = {} as U;
-            try {
-                result = await Axios.put(request.Url === undefined ? '' : request.Url + request.Method, request.Model);
-            } catch (e) {
-                result.Error = e.message;
-            }
-            return result;
-        },
-        GetData: async (request: T): Promise<U> => {
-            let result: U;
-            result = {} as U;
-            try {
-                result = await Axios.get(request.Url === undefined ? '' : request.Url + request.Method);
-            } catch (e) {
-                result.Error = e.message;
-            }
-            return result;
-        },
-        DeleteData: async (request: T): Promise<U> => {
-            let result: U;
-            result = {} as U;
-            try {
-                result = await Axios.delete(request.Url === undefined ? '' : request.Url + request.Method);
-            } catch (e) {
-                result.Error = e.message;
+            } finally{
+                
             }
             return result;
         }
-    }
+        PutData = async (request: T): Promise<U> => {
+            let result: U;
+            result = {} as U;
+            try {
+                result = await axios.put(request.Url === undefined ? '' : request.Url + request.Method, (request.Model ? request.Model.length <= 1 ? request.Model[0] : request.Model : {}));
+            } catch (e) {
+                result.Error = e.message;
+            }
+            return new Promise<U>(()=>result);
+        }
+        GetData = async (request: T): Promise<U> => {
+            let result: U;
+            result = {} as U;
+            try {
+                result = await axios.get(request.Url === undefined ? '' : request.Url + request.Method);
+            } catch (e) {
+                result.Error = e.message;
+            }
+            return new Promise<U>(()=>result);
+        }
+        DeleteData = async (request: T): Promise<U> => {
+            let result: U;
+            result = {} as U;
+            try {
+                result = await axios.delete(request.Url === undefined ? '' : request.Url + request.Method);
+            } catch (e) {
+                result.Error = e.message;
+            }
+            return new Promise<U>(()=>result);
+        }
 }

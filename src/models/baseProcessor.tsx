@@ -4,7 +4,7 @@ class BaseProcessor {
         return word.split('');//.join(',');
     }
     static TryParseInt(str: any) {
-        let retValue = null;
+        let retValue: number | null = null;
         let out = false;
         if (str !== null) {
             if (str.length > 0) {

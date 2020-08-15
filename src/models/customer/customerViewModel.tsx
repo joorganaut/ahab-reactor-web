@@ -7,10 +7,10 @@ export default class CustomerViewModel extends ViewModel {
     constructor(props: CustomerModel) {
         super(props);
         this.ID = props.ID;
-        this.Manager().GetData(new GetCustomerRequest(this.ID)).then(res => {
+        this.Manager.GetData(new GetCustomerRequest(this.ID)).then(res => {
             let response: GetCustomerResponse = new GetCustomerResponse(res);
             if (!ViewModel.IsNullOrUndefined(response) && !ViewModel.IsNullOrUndefined(response.Model)) {
-                if (response.Code === '00') {                    
+                if (response.Code === '00') {
                     let records = (response.Model as CustomerModel[]);
                     let data = records !== undefined ? records[0] : new CustomerModel({});
                     this.FirstName.Value = data.FirstName;
@@ -26,13 +26,13 @@ export default class CustomerViewModel extends ViewModel {
             }
         })
     }
-    Error: IModelAttribute = { FieldName: 'Error', Type: 'label', Value: '' };
+    Error: IModelAttribute = { FieldName: 'Error', Type: 'text', Value: '' };
     ID?: number = 0;
-    FirstName: IModelAttribute = { FieldName: "First Name", Type: "label", Value: '' };
-    LastName: IModelAttribute = { FieldName: "Last Name", Type: "label", Value: '' };
-    Email: IModelAttribute = { FieldName: "Email", Type: "label", Value: '' };
-    PhoneNumber: IModelAttribute = { FieldName: "Phone Number", Type: "label", Value: '' };
-    Gender: IModelAttribute = { FieldName: "Gender", Type: "label", Value: '' };
+    FirstName: IModelAttribute = { FieldName: "First Name", Type: "text", Value: '' };
+    LastName: IModelAttribute = { FieldName: "Last Name", Type: "text", Value: '' };
+    Email: IModelAttribute = { FieldName: "Email", Type: "email", Value: '' };
+    PhoneNumber: IModelAttribute = { FieldName: "Phone Number", Type: "text", Value: '' };
+    Gender: IModelAttribute = { FieldName: "Gender", Type: "select", Value: [{ key: 'male', value: '0' }, { key: 'female', value: '1' }] };
     SubmitAction = async () => {
         throw new Error("Method not implemented.");
     };

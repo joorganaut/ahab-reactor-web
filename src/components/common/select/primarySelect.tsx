@@ -4,10 +4,10 @@ interface PSProps{
     label: string;
     value: string[];
     name: string;
-    onSelectChange: (e: any)=>{}
+    onSelectChange: (e: any)=>void
 }
 const Input = styled.select`
-
+width: 200px
     `
 const Container = styled.div`
     flex: row;
