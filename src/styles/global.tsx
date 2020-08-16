@@ -25,6 +25,9 @@ export const theme = {
     hint: 'yellow',
     money: '#85bb65',
     cell: '#cceefa',
+    banner1: '#002060',
+    banner2: '#4257c5',
+    navLink: '#4472C4'
   },
   fonts: {
     primary: 'Poppins, sans-serif',

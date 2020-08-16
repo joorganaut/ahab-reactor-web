@@ -30,7 +30,6 @@ const Hint = styled.div`
 
   text-align: left;
 `
-
 export const Label: FC<{
   label: string
   hint?: string

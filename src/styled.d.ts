@@ -23,6 +23,9 @@ interface ThemeColours {
   hint: string
   money: string
   cell: string
+  banner1: string
+  banner2: string
+  navLink: string
   [key: string]: string
 }
 

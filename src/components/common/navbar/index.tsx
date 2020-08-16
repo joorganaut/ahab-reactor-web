@@ -5,7 +5,14 @@ import { useSpring, animated, config } from "react-spring";
 import Brand from "./brand";
 import BurgerMenu from "./burgerMenu";
 import CollapseMenu from "./collapseMenu";
+import {DropDown} from '../select/dropdown';
+const data=[
+  {key: 'Change Role', value: 'ChangeRole'},
+  {key: 'Logout', value: 'Logout'}
+]
+const OnSelectChange = (e: any):void => {
 
+}
 const Navbar = (props: any) => {
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
@@ -25,10 +32,11 @@ const Navbar = (props: any) => {
         <FlexContainer>
           <Brand />
           <NavLinks style={linkAnimation}>
-            <a href="/">link n1</a>
+            <DropDown label={'Osazee Igbinosun'} data={data} onSelectChange={OnSelectChange}></DropDown>
+            {/* <a href="/">link n1</a>
             <a href="/">link n2</a>
             <a href="/">link n3</a>
-            <a href="/">link n4</a>
+            <a href="/">link n4</a> */}
           </NavLinks>
           <BurgerWrapper>
             <BurgerMenu
@@ -53,7 +61,8 @@ const NavBar = styled(animated.nav)`
   width: 100%;
   top: 0;
   left: 0;
-  background: #2d3436;
+  /* background: #2d3436; */
+  background-image: linear-gradient(to right, ${props=> props.theme.colors.primary}, ${props=> props.theme.colors.banner2});
   z-index: 1;
   font-size: 1.4rem;
 `;

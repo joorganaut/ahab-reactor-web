@@ -5,7 +5,7 @@ import Input from './input/';
 import { PrimarySelect } from './select/primarySelect';
 import { Button } from './button/button';
 import ObjectProcessor from '../../services/objectProcessor';
-import { Form as FormX, FormContainer, FormSection, Title } from './container/'
+import { Form as FormX, FormContainer, FormSection, Title, Wrapper } from './container/'
 import BasePage from './page/basePage';
 import IModel, { IViewModel } from '../../models/iModel';
 import IHttpObject, { IRequest, IResponse } from '../../models/iHttpObject';
@@ -64,7 +64,7 @@ export default class Form
                     RedirectPath: response.RedirectPath,
                     RedirectParams: response.Model
                 });
-                await this.notify(response.Message);
+                await this.notify('success', response.Message);
             } else {
                 this.notify('info', (response.Message !== undefined ? response.Message : response.Error))
             }
@@ -75,7 +75,9 @@ export default class Form
         //Do something with response
     }
     renderPage() {
-        return (<FormWrapper color={this.state.BackgroundColor}>
+        return (
+        // <Wrapper>
+        <FormWrapper>
             {/* Design the form using the view model*/}
             <FormContainer>
                 <FormX method="POST">
@@ -113,7 +115,9 @@ export default class Form
                     })}
                 </FormX>
             </FormContainer>
-        </FormWrapper>)
+        </FormWrapper>
+        // </Wrapper>
+        )
     }
     render() {
         return (<>
