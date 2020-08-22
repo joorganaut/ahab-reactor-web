@@ -18,6 +18,7 @@ interface InputProps extends TextInputProps {
   hint?: string
   placeholder?: string
   max?: string
+  min?: string
 }
 
 const TextInput = styled.input<TextInputProps>`
@@ -44,6 +45,7 @@ const TextInput = styled.input<TextInputProps>`
 export const Input: FC<InputProps> = ({
   name,
   max,
+  min,
   label,
   value,
   type,
@@ -55,7 +57,7 @@ export const Input: FC<InputProps> = ({
     case 'date':
       return (
         <Label label={label} hint={hint}>
-          <TextInput max={max} name={name} value={value} onChange={onTextChange} type={type} placeholder={placeholder} />
+          <TextInput required min={min} max={max} name={name} value={value} onChange={onTextChange} type={type} placeholder={placeholder} />
         </Label>
       )
     case 'money':

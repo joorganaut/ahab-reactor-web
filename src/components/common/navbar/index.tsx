@@ -1,18 +1,17 @@
 import React from 'react'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
-
 import Brand from "./brand";
-import BurgerMenu from "./burgerMenu";
 import CollapseMenu from "./collapseMenu";
-import {DropDown} from '../select/dropdown';
-const data=[
-  {key: 'Change Role', value: 'ChangeRole'},
-  {key: 'Logout', value: 'Logout'}
-]
-const OnSelectChange = (e: any):void => {
+import { Button } from '../button';
+import useI18n from '../../../hooks/useI18n';
+import { useHistory } from 'react-router-dom';
+import { NameLabel } from '../label';
+import DialogNotification from '../notification/dialogNotification'
 
-}
+
+
+
 const Navbar = (props: any) => {
   const barAnimation = useSpring({
     from: { transform: 'translate3d(0, -10rem, 0)' },
@@ -25,48 +24,87 @@ const Navbar = (props: any) => {
     delay: 800,
     config: config.wobbly,
   });
+  const { t } = useI18n();
+  const history = useHistory();
+  const onLogout = (e: any): void => {
 
+    history.push('/')
+  }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const alert = (title: string, message: string, type: 'info' | 'success' | 'error', callback?: ()=>void) => {
+    const button = [{
+        label: 'Ok',
+        onClick: callback ? callback : () =>{}
+    }]
+    return DialogNotification(title, message, button, true, type)
+  }
+  const confirm = (callback: (e?: any)=>void) => {
+    const buttons = [
+        {
+            label: 'Ok',
+            onClick: callback
+        },
+        {
+            label: 'Cancel',
+            onClick: ()=>{}
+        }
+    ]
+    return DialogNotification("Confirm", 'Are you sure?', buttons, true, 'info')
+  }
   return (
     <>
       <NavBar style={barAnimation}>
         <FlexContainer>
           <Brand />
           <NavLinks style={linkAnimation}>
-            <DropDown label={'Osazee Igbinosun'} data={data} onSelectChange={OnSelectChange}></DropDown>
-            {/* <a href="/">link n1</a>
-            <a href="/">link n2</a>
-            <a href="/">link n3</a>
-            <a href="/">link n4</a> */}
+              <NameLabel Title={`Hi, ${props.name}`} />
+            <Button type={'outline'} onClick={(e: any)=>{ confirm(() => {onLogout(e)})}}>
+              {t('nav.logout')}
+            </Button>
+            <Flag src={'/assets/Canada.svg.png'} />
           </NavLinks>
-          <BurgerWrapper>
+          {/* <BurgerWrapper>
             <BurgerMenu
-              navbarState={props.navbarState} 
+              navbarState={props.navbarState}
               handleNavbar={props.handleNavbar}
             />
-          </BurgerWrapper>
+          </BurgerWrapper> */}
         </FlexContainer>
       </NavBar>
-      <CollapseMenu 
-        navbarState={props.navbarState} 
+      <CollapseMenu
+        navbarState={props.navbarState}
         handleNavbar={props.handleNavbar}
       />
-   </>
+    </>
   )
 }
 
 export default Navbar
-
 const NavBar = styled(animated.nav)`
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 50px;
   left: 0;
   /* background: #2d3436; */
-  background-image: linear-gradient(to right, ${props=> props.theme.colors.primary}, ${props=> props.theme.colors.banner2});
+  /* background-image: linear-gradient(to right, ${props => props.theme.colors.primary}, ${props => props.theme.colors.banner2}); */
+  background-color: ${props => props.theme.colors.white};
   z-index: 1;
-  font-size: 1.4rem;
+  font-size: 1rem;
 `;
 
+
+const Flag = styled.img`
+position: relative;
+top: 5px;
+height: 20px;
+width: 30px;
+margin: 0px 10px 0 20px;
+border: solid;
+border-width: 1px;
+border-color: ${props => props.theme.colors.compliment};
+border-radius: 3px;
+background-image: url('/assets/Canada.svg.png');
+`
 const FlexContainer = styled.div`
   max-width: 120rem;
   display: flex;
@@ -102,10 +140,10 @@ const NavLinks = styled(animated.ul)`
   }
 `;
 
-const BurgerWrapper = styled.div`
-  margin: auto 0;
+// const BurgerWrapper = styled.div`
+//   margin: auto 0;
 
-  @media (min-width: 769px) {
-    display: none;
-  }
-`;
+//   @media (min-width: 769px) {
+//     display: none;
+//   }
+// `;

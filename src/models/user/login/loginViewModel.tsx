@@ -1,7 +1,6 @@
 import { ViewModel, IModelAttribute } from "../../iModel";
 import LoginRequest from "./loginRequest";
 import LoginResponse from "./loginResponse";
-import { IRequest } from "../../iHttpObject";
 import LoginModel from "./loginModel";
 import MiddlewareManager from "../../../services/middlewareManager";
 
@@ -11,23 +10,37 @@ export default class LoginViewModel extends ViewModel {
         this.Model = model;
     }
     Error: IModelAttribute = { FieldName: 'Error', Type: 'text', Value: '' };
-    InstitutionCode: IModelAttribute = { FieldName: "Institution Code", Type: "text", Value: '' };
-    LoginUsername: IModelAttribute = { FieldName: "Username", Type: "text", Value: '' };
-    Password: IModelAttribute = { FieldName: "Password", Type: "password", Value: '' };
-    Button: IModelAttribute = { FieldName: "Submit", Type: "button", Value: this.SubmitAction }
+    // InstitutionCode: IModelAttribute = { FieldName: "auth.labels.institution", Type: "text", Value: '202062418221' };
+    LoginUsername: IModelAttribute = { FieldName: "auth.labels.email", Type: "text", Value: '' };
+    Password: IModelAttribute = { FieldName: "auth.labels.password", Type: "password", Value: '' };
+    Button: IModelAttribute = { FieldName: "auth.signIn", Type: "button", Value: this.SubmitAction }
     async SubmitAction(params: LoginRequest): Promise<LoginResponse | void> {
         this.Manager = new MiddlewareManager();
         let response: LoginResponse;
         try {
             let data: LoginModel = params.Model !== undefined ? params?.Model[0] : {}
+            data.InstitutionCode = '202062418221';
             let request = new LoginRequest(data);
             let res = await this.Manager.PostData(request);
             response = new LoginResponse(res);
             if (!ViewModel.IsNullOrUndefined(response)) {
-                if(response.Code === '00'){
-                    response.Redirect = true;
-                    response.RedirectPath = '/dashboard';
+                switch(response.Code){
+                    case '00':{
+                        response.Message = 'Welcome';
+                        response.Redirect = true;
+                        response.RedirectPath = '/dashboard';
+                        break;
+                    }
+                    case 'AE':{
+                        response.Message = 'Invalid Login Credentials';
+                        break;
+                    }
+                    default:{
+                        response.Message = 'Something terrible happened';
+                        break;
+                    }
                 }
+                
                return response;
             } else {
                 response = new LoginResponse();

@@ -1,0 +1,339 @@
+{
+    "auth": {
+      "google": {
+        "signIn": "Sign-In with Google",
+        "signUp": "Sign-Up with Google"
+      },
+      "facebook": {
+        "signIn": "Sign-In with Facebook",
+        "signUp": "Sign-Up with Facebook"
+      },
+      "signIn": "Sign In",
+      "signUp": "Sign Up",
+      "passwordRequirements": "Password must have at least: 1 lowercase letter, 1 uppercase letter, 1 special character, 1 number, and 8 characters minimum",
+      "errors": {
+        "invalidEmail": "You must provide a valid email",
+        "invalidEmailOrPassword": "Email or password is not valid",
+        "passwordMismatch": "Password do not match.",
+        "generic": "Invalid email or password. Please try again.",
+        "cognito": {
+          "InvalidParameterException": "Password did not conform with policy: Password must have at least 8 characters",
+          "UsernameExistsException": "Email has already been used. Please Try again.",
+          "NotAuthorizedException": "This account has been disabled. Please contact support.",
+          "other": "Something went wrong. Please try again."
+        },
+        "invalidCode": "You must provide a valid code",
+        "invalidCodeOrPassword": "Code or password is not valid",
+        "genericCode": "Invalid code or password. Please try again."
+      },
+      "labels": {
+        "institution": "Institution Code",
+        "email": "Email",
+        "password": "Password",
+        "passwordConfirm": "Password Confirmation"
+      },
+      "forgotPassword": "Forgot your password?",
+      "newRegistration": "You email address has been validated. Please login again to start using the platform.",
+      "confirm": {
+        "title": "Confirm email address",
+        "subtitle": "A 6 digit confirmation code has been sent to your email",
+        "placeholder": "Enter 6-digit code",
+        "labels": {
+          "code": "Code"
+        },
+        "submitButton": "Confirm",
+        "resendButton": "Resend Code",
+        "resendMessage": "Code re-sent to email provided",
+        "invalidCodeError": "Invalid code. Please try again."
+      },
+      "resetPassword": {
+        "title": "Forgot your Password?",
+        "subtitle": "Fear not. Enter your email address below, and we'll email you a 6-digit recovery code.",
+        "sendCodeButton": "Send Code"
+      },
+      "confirmResetPassword": {
+        "title": "Enter confirmation code",
+        "subtitle": "A 6-digit recovery code has been sent to the email that you provided. Please enter below along with a new password.",
+        "labels": {
+          "code": "Enter Code",
+          "password": "Enter a new Password",
+          "passwordConfirm": "Enter the new password again"
+        },
+        "buttons": {
+          "submit": "Update Password",
+          "resend": "Resend Code"
+        },
+        "messages": {
+          "resent": "Code re-sent to email provided"
+        }
+      }
+    },
+    "global": {
+      "cancel": "Cancel",
+      "apply": "Apply",
+      "print": "Print",
+      "exit": "Exit",
+      "error": "Error",
+      "loading": "Loading",
+      "disclaimer": "NOTE: The quoting and some product data is provided by a third party provider. Every effort has been made to ensure that the information contained in this quotation is up-to-date and accurate. In the event of discrepancy, the insurance policy governs. As market conditions fluctuate, plans may be subject to changes in both price and design and subject to change without notice. Premiums and Values illustrated reflect amounts at the beginning of the insurance age displayed.",
+      "privacy": "Privacy Policy",
+      "termsOfUse": "Terms of Use",
+      "errors": {
+        "FN-9999": "Something went wrong. Please contact support with error code: FN-9999"
+      }
+    },
+    "productTypes": {
+      "life": "Life",
+      "critical": "Critical Illness",
+      "disability": "Disability"
+    },
+    "nav": {
+      "marketplace": "Marketplace",
+      "signInCTA": "Already a member?",
+      "signUpCTA": "Need an account?",
+      "logout": "Log Out"
+    },
+    "onboarding": {
+      "title": "Let's quickly set up your advisor profile",
+      "labels": {
+        "givenName": "First Name",
+        "familyName": "Last Name",
+        "phoneNumber": "Business Phone Number",
+        "dateOfBirth": "Birthdate",
+        "businessState": "Province",
+        "fypLastYear": "Range"
+      },
+      "placeholders": {
+        "givenName": "Enter your first name",
+        "familyName": "Enter your last name",
+        "phoneNumber": "Enter your business phone number",
+        "dateOfBirth": "yyyy/mm/dd"
+      },
+      "messages": {
+        "hubContract": "Do you have a contract with HUB Financial?",
+        "businessState": "What province do you primarily operate your business in?",
+        "fypLastYear": "How much first year premium did you generate last year?"
+      },
+      "error": "Error: Please fill out all fields to proceed",
+      "submit": "Get Started  →"
+    },
+    "tabs": {
+      "life": "Life",
+      "critical": "Critical Illness",
+      "disability": "Disability",
+      "all": "Show all",
+      "carriers": "Carriers"
+    },
+    "list": {
+      "groups": "{{matches}} Matching Product Group(s), {{products}} Product(s)"
+    },
+    "marketplace": {
+      "title": "Marketplace",
+      "productGroupCTA": "View full details",
+      "byline": "by {{carrier.name}}",
+      "loadMore": "Load More",
+      "empty": "No results found.",
+      "list": {
+        "products": "{{count}} product",
+        "products_plural": "{{count}} products",
+        "match": "match your filter selection",
+        "carriers": "All Carriers",
+        "carriersFilter": "{{count}} Carrier",
+        "carriersFilter_plural": "{{count}} Carriers"
+      },
+      "carrierFilter": {
+        "help": "Select the carriers you want to see in your results"
+      },
+      "view": {
+        "smallTile": "Small Tile",
+        "largeTile": "Large Tile",
+        "list": "List"
+      },
+      "quotes": {
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      }
+    },
+    "compare":{
+      "breadcrumb": "Back to Product comparison",
+      "breadcrumb-current": "Product Comparison Personalization",
+      "footer": "Made with"
+    },
+    "company":{
+      "name": "Joorganautia",
+      "copyright": "Copyright"
+    },
+    "dashboard": {
+        "paypoint": "Joorganaut's Paypoint",
+        "wallet": {
+          "title": "Wallet"
+        },
+        "payments": {
+          "methods": "Payment Methods",
+          "frequent": {
+            "title": "Frequent Payments"
+          },
+          "dispute": "Dispute Resolution",
+          "instant":{
+            "title": "Biller Payments"
+          }
+        },
+        "exchange": {
+            "functions": {
+              "add": {
+                "title": "Register Xchange"
+              },
+              "viewDetails":{
+                "title": "View Exchange Details",
+                "fields": {
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "amount": "Amount",
+                  "rate": "Rate",
+                  "toCurrency": "To Currency",
+                  "fromCurrency": "From Currency",
+                  "status": "Status",
+                  "button": "Request",
+                  "expiryDate": "Expiry Date"
+                }
+              }
+            },
+            "status":{
+              "pending": "Pending",
+              "completed": "Completed",
+              "cancelled": "Cancelled"
+            }
+        },
+        "accounts": {
+          "home": {
+            "title": "Accounts and Transactions History"
+          },
+          "transactions": {
+            "title": "Transactions",
+            "recurring": "Recurring Transactions"
+          }
+        }
+    },
+    "sidebar":{
+        "actions":{
+          "dashboard": "Dashboard",
+          "transfer": "Transfers",
+          "airtime": "Airtime",
+          "billsPayment": "Pay Bills",
+          "notifications": "Notifications",
+          "exchange": "Xchange"
+        }
+    },
+    "storefront": {
+      "carrierName": "{{carrier.name}} Storefront",
+      "breadcrumb": "Back to Marketplace",
+      "byline": "by {{carrier.name}}",
+      "productGroupCTA": "View Products",
+      "productCTA": "Get Quote →",
+      "productsTitle": "{{title}} Products",
+      "productsBreadcrumb": "Back to {{name}}",
+      "suitabilityTitle": "Suitability",
+      "list": {
+        "products": "{{count}} product"
+      }
+    },
+    "quotes": {
+      "annualRate": "Annual quoted rate:",
+      "monthlyRate": "Monthly quoted rate:",
+      "per": {
+        "monthly": "{{rate}} /mo",
+        "yearly": "{{rate}} /yr"
+      }
+    },
+    "form": {
+      "labels": {
+        "dateOfBirth": "Date of Birth",
+        "businessState": "Province",
+        "healthClass": "Health Class",
+        "faceAmount": "Face Amount",
+        "sex": "Sex",
+        "smokingStatus": "Smoking Status"
+      },
+      "error": "Error: Please fill out all fields to proceed",
+      "submit": "Submit",
+      "title": "Complete the following to quote {{type}} products",
+      "close": "Close"
+    },
+    "typecodes": {
+      "10_PAY": "Pay for 10 Years",
+      "15_PAY": "Pay for 15 Years",
+      "20_PAY": "Pay for 20 Years",
+      "25_PAY": "Pay for 25 Years",
+      "30_PAY": "Pay for 30 Years",
+      "PAY_TO_55": "Pay until Age 55",
+      "PAY_TO_60": "Pay until Age 60",
+      "PAY_TO_65": "Pay until Age 65",
+      "PAY_TO_70": "Pay until Age 70",
+      "PAY_TO_75": "Pay until Age 75",
+      "PAY_TO_100": "Pay until Age 100"
+    },
+    "productFilters": {
+      "favouritesComingSoon": "Filter saving is coming soon!",
+      "termLength": {
+        "title": "Term Length",
+        "summary": "Length: {{terms}}",
+        "summary_plural": "Lengths: {{terms}}",
+        "all": "All results"
+      },
+      "appLength": {
+        "title": "Application Length",
+        "summary": "Length: {{terms}}",
+        "summary_plural": "Lengths: {{terms}}",
+        "all": "All results",
+        "values": {
+          "s": {
+            "title": "Simple Application",
+            "short": "Simple",
+            "subtitle": "20 mins"
+          },
+          "m": {
+            "title": "Medium Application",
+            "short": "Medium",
+            "subtitle": "30-45 mins"
+          },
+          "f": {
+            "title": "Full-Length Application",
+            "short": "Full-Length",
+            "subtitle": "60+ mins"
+          }
+        }
+      },
+      "cashValue": {
+        "title": "Cash Value",
+        "labels": {
+          "yes": "Yes",
+          "no": "No",
+          "off": "Any"
+        }
+      },
+      "medical": {
+        "title": "Medical Required",
+        "labels": {
+          "yes": "Yes",
+          "no": "No",
+          "off": "Any"
+        }
+      },
+      "underwriting": {
+        "title": "Underwriting Required",
+        "labels": {
+          "yes": "Yes",
+          "no": "No",
+          "off": "Any"
+        }
+      },
+      "quote": {
+        "title": "Quote Available",
+        "description": "Remove results where a quote is not available.",
+        "labels": {
+          "on": "Quoted only",
+          "off": "Any"
+        }
+      }
+    }
+  }

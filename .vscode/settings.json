@@ -2,6 +2,25 @@
     "cSpell.words": [
         "Burgermenu",
         "Phonenumber",
-        "Toastify"
+        "Toastify",
+        "checkmark",
+        "esnext",
+        "paypoint",
+        "styl"
+    ],
+    "cSpell.ignoreWords": [
+        "billspayment",
+        "href",
+        "passwordrecovery",
+        "register",
+        "register xchange",
+        "sidenav",
+        "sign",
+        "sign up href user signup",
+        "signin",
+        "signup",
+        "up",
+        "user",
+        "xchange"
     ]
 }

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { Button } from '../../../components/common/button/button'
 import Input from '../../../components/common/input/'
-import { Form, FormContainer, FormSection, Error } from '../../../components/common/container/'
+import { Form, FormContainer, FormSection } from '../../../components/common/container/'
 
 export const SignInForm = () => {
   const [email, updateEmail] = useState('')

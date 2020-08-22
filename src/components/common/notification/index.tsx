@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
 
 export class Notification {
-    showNotification = async ( Type: string, Word?: string ) => {
+    showNotification = async (Type: string, Word?: string) => {
         switch (Type) {
             case 'success':
                 toast.success(Word, {
@@ -62,4 +62,4 @@ export class Notification {
                 break;
         }
     }
-    }
+}

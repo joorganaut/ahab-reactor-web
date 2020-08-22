@@ -4,11 +4,12 @@ import { Redirect } from 'react-router-dom';
 import { Notification } from '../notification/';
 import BaseProcessor from '../../../models/baseProcessor';
 import MiddlewareManager from '../../../services/middlewareManager';
-import BaseState from '../../../models/contracts/baseState';
-import BaseProp from '../../../models/contracts/baseProp';
-import { Wrapper} from '../container/'
+import { Wrapper} from '../container/';
+import { WithTranslation } from 'react-i18next';
+import DialogNotification from '../notification/dialogNotification'
 
-export default class BasePage extends React.Component<any, any>{
+
+class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
     manager: MiddlewareManager;
     theme: any;
     Notification: Notification;
@@ -17,13 +18,14 @@ export default class BasePage extends React.Component<any, any>{
         super(props);
         this.state = {
             IsLoading: props.IsLoading === undefined ? false : props.IsLoading,
-            LoadingTitle:  props.LoadingTitle === undefined ? 'loading' : props.LoadingTitle,
+            LoadingTitle:  props.LoadingTitle === undefined ? ('global.loading'): props.LoadingTitle,
             UserID:  props.UserID === undefined ? 0 : props.UserID,
             Redirect:  props.Redirect === undefined ? false : props.Redirect,
             RedirectPath:  props.RedirectPath === undefined ? '/' : props.RedirectPath,
             RedirectParams: props.RedirectParams === undefined ? {} : props.RedirectParams,
             User: props.User === undefined ? {} : props.User
         }
+        
         this.manager = new MiddlewareManager();
         this.Notification = new Notification();
     }
@@ -39,7 +41,27 @@ export default class BasePage extends React.Component<any, any>{
         )
     }
     async notify(type: string, word?: string){
-        await this.Notification.showNotification(type, word);
+        //await this.Notification.showNotification(type, word);
+    }
+    async alert(title: string, message: string, type: 'info' | 'success' | 'error', callback?: ()=>void){
+        const button = [{
+            label: 'Ok',
+            onClick: callback ? callback : () =>{}
+        }]
+        return DialogNotification(title, message, button, true, type)
+    }
+    async confirm(callback: ()=>void){
+        const buttons = [
+            {
+                label: 'Ok',
+                onClick: callback
+            },
+            {
+                label: 'Cancel',
+                onClick: ()=>{}
+            }
+        ]
+        return DialogNotification("Confirm", 'Are you sure?', buttons, true, 'info')
     }
     renderAllComponents=(callback?: any)=>{
         //this.ValidateRoles();
@@ -68,3 +90,4 @@ export default class BasePage extends React.Component<any, any>{
         </Wrapper>)
     }
 }
+export default BasePage;

@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from "styled-components";
-import {LogoSmall} from '../logo'
 
 // import logo from "../../assets/logo-min.png";
 
 const Brand = () => {
   return (
     <Container width={'auto'}>
+      {/* TODO: remember to uncomment */}
     <Image src={'/assets/logo.png'} alt="Company Logo" />
     </Container>
   )
@@ -17,7 +17,7 @@ const Container = styled.div<{width:string}>`
 margin: 20px;
 height: auto;
 position: relative;
-border: solid;
+border: none;
 border-width: 2px;
 border-radius: 30px;
 border-color: ${props=> props.theme.colors.compliment};

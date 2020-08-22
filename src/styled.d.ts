@@ -2,6 +2,9 @@ import 'styled-components'
 
 interface ThemeColours {
   primary: string
+  primaryDark: string
+  primaryLight: string
+  primaryHover: string
   compliment: string
   lightPrimary: string
   secondary: string

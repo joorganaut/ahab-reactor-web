@@ -9,6 +9,7 @@ export interface IRequest extends IHttpObject{
     SearchParams?: any;
     Url?: string;
     Method?: string;
+    Config?: any;
 }
 export interface IResponse extends IHttpObject{
     Model?: IModel[];
@@ -22,7 +23,8 @@ export interface IResponse extends IHttpObject{
 export class Request implements IRequest {
     Model?: IModel[];
     SearchParams?: any;
-    Url?: string;
+    Config?: any;
+    Url?: string = process.env.REACT_APP_MIDDLEWARE;;
     Method?: string;
     async ToObject(value: string): Promise<IRequest> {
         return await new Promise(()=>{ JSON.parse(value)});

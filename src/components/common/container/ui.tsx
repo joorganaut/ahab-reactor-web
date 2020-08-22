@@ -22,7 +22,7 @@ export const FormSection = styled.div`
   justify-content: center;
 
   @media screen and (min-width: ${(props) => props.theme.breakpoints.medium}) {
-    width: 40%;
+    width: 100%;
   }
 `
 

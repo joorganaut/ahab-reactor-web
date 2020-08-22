@@ -1,0 +1,32 @@
+{
+    "auth": {
+      "nav": {
+        "signIn": {
+          "CTA": "Déjà enregistré?"
+        }
+      },
+      "google": {
+        "signIn": "Connectez-vous avec Google",
+        "signUp": "Inscrivez-vous avec Google"
+      },
+      "signIn": "Connectioner",
+      "signUp": "Enregistrer",
+      "passwordRequirements": "Le mot do passe doit comprimer: 1 lettre miniscule, 1 lettre majuscule, 1 lettre special, 1 nombre, et doit comporter au moins 8 caractères.",
+      "errors": {
+        "invalidEmail": "Vous devez fournir une addresse électronique valide",
+        "invalidEmailOrPassword": "Addresse électronique ou mot de passe est invalide.",
+        "passwordMismatch": "Les mots de passe ne correspondent pas",
+        "generic": "Addresse électronique ou mot de passe est invalide. Veuillez réessayer.",
+        "cognito": {
+          "InvalidParameterException": "Le mot de passe ne conforme pas à la politique; Il doit comporter au moins 8 caractères.",
+          "UsernameExistsException": "Addresse Électronique à déjà été utilisée. Veuillez réessayer.",
+          "other": "Il y a une erreur. Veuillez réessayer."
+        }
+      },
+      "labels": {
+        "email": "Addresse Électronique",
+        "password": "Mot de passe",
+        "passwordConfirm": "Confirmation du mot de passe"
+      }
+    }
+  }

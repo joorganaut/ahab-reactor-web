@@ -2,12 +2,15 @@ import { createGlobalStyle } from 'styled-components/macro'
 export const theme = {
   colors: {
     primary: '#4b0082',
+    primaryDark: '#0D0C1D',
+    primaryLight: '#EFFFFA',
+    primaryHover: '#343078',
     compliment: '#FFA500',
     lightPrimary: '#f7f4ff',
     secondary: '#343D4B',
     outline: '#F6F6F9',
-    background: '#F8F8FA',
-    lightGrey: '#929DAD',
+    background: '#eff2f7',
+    lightGrey: '#eff2f7',
     lightGrey2: '#909DAF',
     darkGrey: '#141418',
     baseText: '#343D4B',
@@ -37,7 +40,7 @@ export const theme = {
 
   },
   breakpoints: {
-    small: '360px',
+    small: '576px',
     medium: '720px',
     large: '1080px',
     xlarge: '1440px',
@@ -53,7 +56,8 @@ html, body, #root {
   }
 
   body {
-    overflow-y: scroll;
+    overflow-y: hidden;
+    overflow-x: hidden;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -7,6 +7,7 @@ const HomeRouter = () => (
     <Switch>
         <Route exact path='/' component={Login}/>
         <Route exact path='/dashboard' component={DashBoard}/>
+        <Route exact path='/dashboard/*' component={DashBoard}/>
     </Switch>
 )
 export default HomeRouter
