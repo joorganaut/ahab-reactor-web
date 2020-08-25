@@ -33,7 +33,7 @@ const ExchangeToolBar: React.FC<ExchangeToolBarProps> = ({showModal, search, sea
                         <SearchIcon className={'icon'}></SearchIcon>
                         <SearchInput type={'text'}
                             onKeyPress={search}
-                            placeholder={'Search'}
+                            placeholder={'search amount'}
                             name={'search'} value={searchParam} onChange={(e: any) => { setSearchParam(e.target.value) }} />
                     </SearchContainer>
                 </FormSection>

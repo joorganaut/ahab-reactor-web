@@ -7,7 +7,8 @@ interface ButtonProps {
   disabled?: boolean
   submit?: boolean
   onClick?: (e: unknown) => void
-  className?: string
+  className?: string,
+  name: string
 }
 
 const BaseButton = styled.button.attrs<ButtonProps>((props) => ({
@@ -84,36 +85,36 @@ const IconButton = styled(BaseButton)<ButtonProps>`
   width: 2em;
 `
 
-export const Button: React.FC<ButtonProps> = ({ type, children, disabled, submit = false, onClick, className }) => {
-  if (disabled) return <DisabledButton className={className}>{children}</DisabledButton>
+export const Button: React.FC<ButtonProps> = ({ type, children, disabled, submit = false, onClick, className, name }) => {
+  if (disabled) return <DisabledButton name={name} className={className}>{children}</DisabledButton>
   switch (type) {
     case 'outline':
       return (
-        <OutlineButton className={className} onClick={onClick} submit={Boolean(submit)}>
+        <OutlineButton name={name} className={className} onClick={onClick} submit={Boolean(submit)}>
           {children}
         </OutlineButton>
       )
     case 'secondary':
       return (
-        <SecondaryButton className={className} onClick={onClick} submit={Boolean(submit)}>
+        <SecondaryButton name={name} className={className} onClick={onClick} submit={Boolean(submit)}>
           {children}
         </SecondaryButton>
       )
     case 'primary':
       return (
-        <PrimaryButton className={className} onClick={onClick} submit={Boolean(submit)}>
+        <PrimaryButton name={name} className={className} onClick={onClick} submit={Boolean(submit)}>
           {children}
         </PrimaryButton>
       )
     case 'bare':
       return (
-        <BareButton className={className} onClick={onClick} submit={Boolean(submit)}>
+        <BareButton name={name} className={className} onClick={onClick} submit={Boolean(submit)}>
           {children}
         </BareButton>
       )
     case 'icon':
       return (
-        <IconButton className={className} onClick={onClick} submit={submit}>
+        <IconButton name={name} className={className} onClick={onClick} submit={submit}>
           {children}
         </IconButton>
       )
@@ -121,6 +122,7 @@ export const Button: React.FC<ButtonProps> = ({ type, children, disabled, submit
       return (
         <BaseButton
           className={className}
+          name={name} 
           onClick={onClick}
           // @ts-ignore
           submit={Boolean(submit)}

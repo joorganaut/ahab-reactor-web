@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
 import Modal from 'styled-react-modal';
 import Form from '../../common/form/form';
-
+import SocialTable from '../../common/table/socialTable'
+import detailForm from '../../common/form/detailForm';
 
 export const StyledModal = Modal.styled`
   width: 20rem;
@@ -134,10 +135,12 @@ export const SpecialModalBackground = styled.div<{ opacity?: string }>`
 `
 export const Content = styled.div`
 display: grid;
-grid-template-rows: 1fr 1fr 1fr;
+grid-template-rows: 1fr 10fr;
 grid-column-gap: 5px;
 position: relative;
 margin: 20px;
+height: 60%;
+justify-items: center;
 `
 export const ToolBar = styled.ul`
     list-style-type: none;
@@ -149,7 +152,7 @@ export const ToolBar = styled.ul`
     height: 40px;
     align-content: center;
     align-items: center;
-    left: 20%;
+    /* left: 20%; */
     position: relative;
     border-radius: 5px;
 `
@@ -160,7 +163,7 @@ border: solid;
 border-color: ${props => props.theme.colors.compliment};
 border-radius: 3px;
 border-width: 1px;
-color: ${props => props.theme.colors.primary};
+color: ${props => props.theme.colors.banner2};
 top: 10px;
 right: 100px;
 padding-left: 20px;
@@ -224,8 +227,25 @@ export const ToolBarButtonIcon = styled.div<{ name: string }>`
 export const AddExchangeForm = styled(Form)`
 color: ${props => props.theme.colors.primary};
 `
+export const ExchangeDetailForm = styled(detailForm)`
+color: ${props => props.theme.colors.primary};
+`
+export const AllExchangesGridTable = styled(SocialTable)`
+color: ${props => props.theme.colors.primary};
+`
 export const AddExchangeWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr;
     margin: 0px 20px 0px 20px;
     `
+export const AllExchangesWrapper = styled.div`
+margin: 0px 20px 0px 20px;
+position: relative;
+overflow-y: hidden;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+height: 100%;
+width: 80%;
+padding: 20px;
+/* background-color: none;${props=> props.theme.colors.background}; */
+`

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from '../../common/button/button';
+import { Button } from '../button/button';
 interface ModalAttributesProps {
   title: string;
   handleClick: (e: any) => void;
@@ -10,7 +10,7 @@ export const ModalAttributes: React.FC<ModalAttributesProps> = ({ ...props }) =>
     <div className="box-dialog">
       <div className="box-header">
         <h4 className="box-title">{props.title} &trade;</h4>
-        <Button type={'primary'} onClick={props.handleClick} className="close">
+        <Button name={'closeButton'} type={'primary'} onClick={props.handleClick} className="close">
           ×
             </Button>
       </div>

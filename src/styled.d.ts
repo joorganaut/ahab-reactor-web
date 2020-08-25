@@ -11,6 +11,7 @@ interface ThemeColours {
   outline: string
   background: string
   lightGrey: string
+  lightGrey2:string
   darkGrey: string
   baseText: string
   darkText: string

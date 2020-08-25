@@ -58,7 +58,7 @@ const Navbar = (props: any) => {
           <Brand />
           <NavLinks style={linkAnimation}>
               <NameLabel Title={`Hi, ${props.name}`} />
-            <Button type={'outline'} onClick={(e: any)=>{ confirm(() => {onLogout(e)})}}>
+            <Button name={'logout'} type={'outline'} onClick={(e: any)=>{ confirm(() => {onLogout(e)})}}>
               {t('nav.logout')}
             </Button>
             <Flag src={'/assets/Canada.svg.png'} />

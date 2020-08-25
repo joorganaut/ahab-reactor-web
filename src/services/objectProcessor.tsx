@@ -21,4 +21,11 @@ export default class ObjectProcessor{
           }
         return result;
     }
+    static SplitOnCapital(word: string): string{
+      if(word !== null && word !== undefined){
+        let match = word.match(/[A-Z][a-z]+|[0-9]+/g);
+        return match !== null ? match.join(" ") : '';
+      }
+      return word;
+    }
 }

@@ -43,7 +43,7 @@ class DashBoard extends BasePage<DashBoardProps, any> {
         switch(this.state.urlQuery){
             case 'exchange':{
                 this.Content = (<Exchange/>);
-                this.setState({background : '/assets/payments.jpg'})
+                // this.setState({background : '/assets/payments.jpg'})
                 break;
             }
             case 'dashboard':{

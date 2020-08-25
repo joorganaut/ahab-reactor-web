@@ -24,7 +24,7 @@ export const SignInForm = () => {
           <Input type="password" label={'auth.labels.password'} value={password} onTextChange={updatePassword} />
         </FormSection>
         <FormSection>
-          <Button type="primary" submit>
+          <Button name={'signIn'} type="primary" submit>
             {'auth.signIn'}
           </Button>
         </FormSection>

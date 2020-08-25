@@ -9,6 +9,7 @@ import BasePage from './../page/basePage';
 import IModel, { IViewModel } from '../../../models/iModel';
 import IHttpObject, { IRequest, IResponse } from '../../../models/iHttpObject';
 import { withTranslation, WithTranslation } from 'react-i18next';
+import { ButtonGroup, ButtonContainer } from '../button';
 interface FormProp extends WithTranslation {
     Model?: IModel;
     ViewModel: IViewModel;
@@ -90,9 +91,6 @@ class Form
     }
     renderPage() {
         return (
-            // <Wrapper>
-            // <FormWrapper>
-
             <FormContainer>
                 <FormX method="POST" onSubmit={this.Submit}>
                     {this.state.Title !== undefined ? <Title>{this.state.Title}</Title> : <></>}
@@ -131,25 +129,20 @@ class Form
                                         value={this.state.ViewModel[x].Value} onTextChange={this.HandleTextChange} />
                                 </FormSection>
                             </>)
-                        } else {
-                            if (this.state.ViewModel[x] !== undefined && this.state.ViewModel[x].Type === 'button') {
-                                return (<>
-                                    <FormSection>
-                                        <Button type="primary" onClick={this.Submit}>
-                                            {this.props.t(this.state.ViewModel[x].FieldName)}
-                                        </Button>
-                                    </FormSection>
-                                </>)
-                            } else {
-                                return <></>
-                            }
                         }
                     })}
+                    <ButtonContainer>
+                        {ObjectProcessor.GetProperties(this.state.ViewModel).filter(x => x.includes('Button')).map((b: any) => {
+                            return (
+                                <Button name={b} type="primary" onClick={this.Submit}>
+                                    {this.props.t(this.state.ViewModel[b].FieldName)}
+                                </Button>
+                            )
+                        })}
+                    </ButtonContainer>
                 </FormX>
-            </FormContainer >
-            // </FormWrapper>
-            // </Wrapper>
-        )
+            </FormContainer>
+            )
     }
     render() {
         return (<>

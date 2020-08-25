@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ReactDom from "react-dom";
 import PropTypes from "prop-types";
 // styled
-import StyledModal from "./styled";
+import StyledModal2 from "./styled";
 const modalRoot = document.getElementById('modal-root') as Element;
 class Modal extends Component<any, any> {
   static defaultProps = {
@@ -46,8 +46,9 @@ handleClick = (e: any) => {
     this.setState({ fadeType: "out" });
   };
 render() {
-    return ReactDom.createPortal(
-      <StyledModal
+    return <>
+    {/* ReactDom.createPortal(
+      <StyledModal2
         id={this.props.id}
         className={`wrapper ${this.props.class}`}
         role="dialog"
@@ -74,9 +75,10 @@ render() {
           onMouseDown={this.handleClick}
           ref={this.background}
         />
-      </StyledModal>,
+      </StyledModal2>,
       modalRoot
-    );
+    ); */}
+    </>
   }
 }
 export default Modal;

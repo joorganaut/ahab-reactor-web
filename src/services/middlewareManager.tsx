@@ -23,25 +23,28 @@ export default class MiddlewareManager {
             let result: U;
             result = {} as U;
             try {
-                result = await axios.put(request.Url === undefined ? '' : request.Url + request.Method, 
+                let r = await axios.put(request.Url === undefined ? '' : request.Url + request.Method, 
                 (request.Model ? request.Model.length <= 1 ? request.Model[0] : request.Model : {}),
                 request.Config === undefined ? null : request.Config
                 );
+                result = r.data;
             } catch (e) {
                 result.Error = e.message;
             }
-            return new Promise<U>(()=>result);
+            return result;//new Promise<U>(()=>);
         }
         GetData = async (request: T): Promise<U> => {
             let result: U;
             result = {} as U;
             try {
-                result = await axios.get(request.Url === undefined ? '' : request.Url + request.Method, 
-                request.Config === undefined ? null : request.Config);
+                await axios.get(request.Url === undefined ? '' : request.Url + request.Method, 
+                request.Config === undefined ? null : request.Config).then(r=>{
+                    result = r.data;
+                });
             } catch (e) {
                 result.Error = e.message;
             }
-            return new Promise<U>(()=>result);
+            return result;//new Promise<U>(()=>);
         }
         DeleteData = async (request: T): Promise<U> => {
             let result: U;
@@ -52,6 +55,6 @@ export default class MiddlewareManager {
             } catch (e) {
                 result.Error = e.message;
             }
-            return new Promise<U>(()=>result);
+            return result; //new Promise<U>(()=>);
         }
 }

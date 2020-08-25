@@ -30,8 +30,8 @@ padding: 20px;
 background-color: ${props => props.theme.colors.background};
 background-repeat: no-repeat;
 background-size: cover;
-background-image: ${props => props.bg ? `url(${props.bg})` : `url('/assets/search-bg.jpg')`};
-opacity: 100%
+background-image: ${props => props.bg ? props.bg === 'none'? 'none' : `url(${props.bg})` : `url('/assets/search-bg.jpg')`};
+opacity: 75%
 `
 export const Content = styled.div`
 display: grid;

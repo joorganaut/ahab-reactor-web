@@ -8,7 +8,7 @@ export default class ExchangeModel extends Model{
     Rate?: number;
     FromCurrency?: string;
     ToCurrency?: string;
-    Status?: 'pending' | 'in-progress' | 'completed' | 'cancelled';
+    Status?: 'pending' | 'in-progress' | 'completed' | 'cancelled' | 'expired';
     PhoneNumber?: string;
     Email?: string;
     ExpiryDate?: Date;

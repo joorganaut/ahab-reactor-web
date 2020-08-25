@@ -181,7 +181,21 @@
         "exchange": {
             "functions": {
               "add": {
-                "title": "Register Xchange"
+                "title": "Register Xchange",
+                "fields": {
+                  "firstName": "First Name",
+                  "lastName": "Last Name",
+                  "amount": "Amount",
+                  "rate": "Rate",
+                  "toCurrency": "To Currency",
+                  "fromCurrency": "From Currency",
+                  "status": "Status",
+                  "buttons": {
+                    "button1": "Request",
+                    "button2": "Cancel"
+                  },
+                  "expiryDate": "Expiry Date"
+                }
               },
               "viewDetails":{
                 "title": "View Exchange Details",
@@ -193,7 +207,10 @@
                   "toCurrency": "To Currency",
                   "fromCurrency": "From Currency",
                   "status": "Status",
-                  "button": "Request",
+                  "buttons": {
+                    "button1": "Accept",
+                    "button2": "Cancel"
+                  },
                   "expiryDate": "Expiry Date"
                 }
               }
