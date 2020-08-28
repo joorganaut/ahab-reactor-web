@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IRequest as T, IResponse as U} from '../models/iHttpObject';
+import { IRequest as T, IResponse as U, ISearchParams as V, ISearchResult as W} from '../models/iHttpObject';
 export default class MiddlewareManager {
 
         PostData = async (request: T): Promise<U> => {
@@ -33,11 +33,11 @@ export default class MiddlewareManager {
             }
             return result;//new Promise<U>(()=>);
         }
-        GetData = async (request: T): Promise<U> => {
-            let result: U;
-            result = {} as U;
+        GetData = async (request: V): Promise<W> => {
+            let result: W;
+            result = {} as W;
             try {
-                await axios.get(request.Url === undefined ? '' : request.Url + request.Method, 
+                await axios.get(request.Url === undefined ? '' : request.Url + request.Method + '?'+this.BuildGetQuery(request), 
                 request.Config === undefined ? null : request.Config).then(r=>{
                     result = r.data;
                 });
@@ -56,5 +56,17 @@ export default class MiddlewareManager {
                 result.Error = e.message;
             }
             return result; //new Promise<U>(()=>);
+        }
+
+        BuildGetQuery = (request: V): string => {
+            let result: string = '';
+            request.Criteria.map(x=>{
+                result+= x.fieldName + '=' + x.fieldValue + '&';
+            })
+            result+= 'Sort='+request.sort + '&';
+            result+= 'Direction='+request.direction + '&';
+            result+= 'Page='+request.page + '&';
+            result+= 'PageSize='+request.pageSize;
+            return result;
         }
 }

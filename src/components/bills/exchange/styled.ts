@@ -65,7 +65,7 @@ border-radius: 6px 6px 6px 6px;
   .box-header {
     height: 48px;
     padding: 8px 24px;
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.banner1};
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -135,7 +135,7 @@ export const SpecialModalBackground = styled.div<{ opacity?: string }>`
 `
 export const Content = styled.div`
 display: grid;
-grid-template-rows: 1fr 10fr;
+grid-template-rows: 1fr 10fr 1fr;
 grid-column-gap: 5px;
 position: relative;
 margin: 20px;
@@ -176,6 +176,9 @@ box-sizing: border-box;
 
 &:focus {
   border: 2px solid ${props => props.theme.colors.banner2};
+}
+&:focus::placeholder {
+  color: transparent;
 }
 `
 export const SearchContainer = styled.div`
@@ -246,6 +249,6 @@ overflow-y: hidden;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
 height: 100%;
 width: 80%;
-padding: 20px;
+padding: 10px;
 /* background-color: none;${props=> props.theme.colors.background}; */
 `

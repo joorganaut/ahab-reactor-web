@@ -62,7 +62,7 @@ border-radius: 6px 6px 6px 6px;
   .box-header {
     height: 48px;
     padding: 8px 24px;
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.banner1};
     font-weight: bold;
     display: flex;
     justify-content: space-between;

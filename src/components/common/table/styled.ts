@@ -7,11 +7,15 @@ export const GridTableContainer = styled.div<{ noOfColumns: number }>`
     border-radius: 6px 6px 0 0;
     background-color: ${props => props.theme.colors.background};
 `
-export const SocialTableContainer = styled.div<{ noOfRows: number }>`
+export const SocialTableContainer = styled.div<{ noOfRows?: number }>`
 display: grid;
  grid-template-rows: ${props => {
+        let rowNo = 0;
+        if(props.noOfRows !== undefined){
+            rowNo = props.noOfRows
+        }
         let result = '1fr ';
-        for (let i = 1; i < props.noOfRows; i++) {
+        for (let i = 1; i < rowNo; i++) {
             result += '1fr ';
         }
         result += ';'
@@ -39,7 +43,7 @@ opacity: 95%;
 border-color: ${props => props.theme.colors.border};
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
 &:hover {
-    transform: scale(1.02); 
+    transform: scale(1.01); 
     transition: all .2s ease-in-out;
     /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
     }

@@ -26,7 +26,7 @@ export interface ISearchCriteria{
 export interface ISearchResult extends IResponse{
     page: number;
     pageSize: number;
-    totalItems: number;
+    count: number;
 }
 export interface ISearchParams extends IRequest{
     Criteria: Array<ISearchCriteria>;
@@ -38,7 +38,7 @@ export interface ISearchParams extends IRequest{
 export class SearchResult implements ISearchResult{
     page: number = 0;
     pageSize: number = 5;
-    totalItems: number = 0;
+    count: number = 0;
     Model?: IModel[] | undefined;
     Redirect?: boolean | undefined;
     RedirectPath?: string | undefined;
@@ -50,6 +50,7 @@ export class SearchResult implements ISearchResult{
         this.Code = props === undefined ? '' : props.Code;
         this.Message = props === undefined ? '' : props.Message;
         this.Model = props === undefined ? {} : props.Model;
+        this.count = props === undefined ? {} : props.count;
         this.Error = props === undefined ? '' : props.Error;
     }
     async ToObject(value: string): Promise<IRequest> {

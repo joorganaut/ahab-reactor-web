@@ -11,19 +11,37 @@ import {
 import { FormSection } from '../../common/container';
 import './toolbar.css';
 interface ExchangeToolBarProps {
-    search: (e: any) => void;
     showModal: (e: any) => void;
-    setSearchParam: (e: any) => void;
     searchParam: string;
+    setSearchParam: (e: any) => void;
+    submit: (e: any) => void;
 }
 
 
-const ExchangeToolBar: React.FC<ExchangeToolBarProps> = ({showModal, search, searchParam, setSearchParam}) => {
+const ExchangeToolBar: React.FC<ExchangeToolBarProps> = ({ ...props }) => {
+    const pressKey = (e: any) => {
+        var code = e.keyCode || e.which;
+        if (code === 13) {
+            e.target.name = 'searchBarItem';
+            e.target.value = props.searchParam;
+            props.submit(e);
+        }
+    }
     return (
         <ToolBar>
             <ToolBarItem>
-                <ToolBarButton onClick={showModal}>
+                <ToolBarButton onClick={props.showModal}>
                     <ToolBarButtonIcon name={'add_database'} />
+                </ToolBarButton>
+            </ToolBarItem>
+            <ToolBarItem>
+                <ToolBarButton onClick={props.showModal}>
+                    <ToolBarButtonIcon name={'accept_database'} />
+                </ToolBarButton>
+            </ToolBarItem>
+            <ToolBarItem>
+                <ToolBarButton onClick={props.showModal}>
+                    <ToolBarButtonIcon name={'delete_database'} />
                 </ToolBarButton>
             </ToolBarItem>
             <ToolBarItem float={'right'}>
@@ -31,10 +49,12 @@ const ExchangeToolBar: React.FC<ExchangeToolBarProps> = ({showModal, search, sea
                 <FormSection>
                     <SearchContainer >
                         <SearchIcon className={'icon'}></SearchIcon>
-                        <SearchInput type={'text'}
-                            onKeyPress={search}
-                            placeholder={'search amount'}
-                            name={'search'} value={searchParam} onChange={(e: any) => { setSearchParam(e.target.value) }} />
+                        <SearchInput type={'number'}
+                            onKeyPress={pressKey}
+                            placeholder={'amount'}
+                            name={'searchBarItem'} 
+                            value={props.searchParam} 
+                            onChange={props.setSearchParam} />
                     </SearchContainer>
                 </FormSection>
                 {/* </SearchForm> */}

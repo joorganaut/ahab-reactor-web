@@ -7,24 +7,24 @@ export default class CustomerViewModel extends ViewModel {
     constructor(props: CustomerModel) {
         super(props);
         this.ID = props.ID;
-        this.Manager.GetData(new GetCustomerRequest(this.ID)).then(res => {
-            let response: GetCustomerResponse = new GetCustomerResponse(res);
-            if (!ViewModel.IsNullOrUndefined(response) && !ViewModel.IsNullOrUndefined(response.Model)) {
-                if (response.Code === '00') {
-                    let records = (response.Model as CustomerModel[]);
-                    let data = records !== undefined ? records[0] : new CustomerModel({});
-                    this.FirstName.Value = data.FirstName;
-                    this.LastName.Value = data.LastName;
-                    this.Email.Value = data.Email;
-                    this.PhoneNumber.Value = data.PhoneNumber;
-                    this.Gender.Value = data.Gender;
-                } else {
-                    this.Error.Value = response.Message + ': ' + response.Error;
-                }
-            } else {
-                this.Error.Value = 'Null response from Middleware';
-            }
-        })
+        // this.Manager.GetData(new GetCustomerRequest(this.ID)).then(res => {
+        //     let response: GetCustomerResponse = new GetCustomerResponse(res);
+        //     if (!ViewModel.IsNullOrUndefined(response) && !ViewModel.IsNullOrUndefined(response.Model)) {
+        //         if (response.Code === '00') {
+        //             let records = (response.Model as CustomerModel[]);
+        //             let data = records !== undefined ? records[0] : new CustomerModel({});
+        //             this.FirstName.Value = data.FirstName;
+        //             this.LastName.Value = data.LastName;
+        //             this.Email.Value = data.Email;
+        //             this.PhoneNumber.Value = data.PhoneNumber;
+        //             this.Gender.Value = data.Gender;
+        //         } else {
+        //             this.Error.Value = response.Message + ': ' + response.Error;
+        //         }
+        //     } else {
+        //         this.Error.Value = 'Null response from Middleware';
+        //     }
+        // })
     }
     Error: IModelAttribute = { FieldName: 'Error', Type: 'text', Value: '' };
     ID?: number = 0;

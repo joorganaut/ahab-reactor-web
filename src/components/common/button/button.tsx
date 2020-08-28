@@ -39,10 +39,10 @@ const BaseButton = styled.button.attrs<ButtonProps>((props) => ({
 
 const PrimaryButton = styled(BaseButton)<ButtonProps>`
   color: rgba(255, 255, 255, 0.8);
-  background-color: ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.banner1};
 
   &:hover {
-    background-color: ${(props) => lighten(0.025, props.theme.colors.primary)};
+    background-color: ${(props) => lighten(0.025, props.theme.colors.banner1)};
     color: white;
   }
 `

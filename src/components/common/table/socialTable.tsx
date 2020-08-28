@@ -21,7 +21,7 @@ import {
 import Countdown from "react-countdown";
 
 export interface SocialTableProps {
-    records: Array<SocialTableRowProps>
+    records?: Array<SocialTableRowProps>
 }
 export interface SocialTableRowProps {
     id?: number;
@@ -40,8 +40,8 @@ interface RecordProps {
     ExpiryDate?: Date;
 }
 const SocialTable: React.FC<SocialTableProps> = ({ ...props }) => {
-    return (<SocialTableContainer noOfRows={props.records.length}>
-        {props.records.map(x => {
+    return (<SocialTableContainer noOfRows={props.records?.length}>
+        {props.records?.map(x => {
             return (<SocialTableRow id={x.id} record={x.record} viewAction={x.viewAction} />)
         })}
     </SocialTableContainer>)
