@@ -25,24 +25,24 @@ export default class LoginViewModel extends ViewModel {
             let res = await this.Manager.PostData(request);
             response = new LoginResponse(res);
             if (!ViewModel.IsNullOrUndefined(response)) {
-                switch (response.Code) {
-                    case '00': {
-                        context.actions.setAuthDetails(response.UserModel.ID?.toString()?? '', response.RedirectParams);
-                        const test = context.actions.getAuthDetails();
-                        response.Message = 'Welcome';
-                        response.Redirect = true;
-                        response.RedirectPath = '/dashboard';
-                        break;
-                    }
-                    case 'AE': {
-                        response.Message = 'Invalid Login Credentials';
-                        break;
-                    }
-                    default: {
-                        response.Message = 'Something terrible happened';
-                        break;
-                    }
-                }
+                // switch (response.Code) {
+                //     case '00': {
+                //         context.actions.setAuthDetails(response.UserModel.ID?.toString()?? '', response.RedirectParams);
+                //         const test = context.actions.getAuthDetails();
+                //         response.Message = 'Welcome';
+                //         response.Redirect = true;
+                //         response.RedirectPath = '/dashboard';
+                //         break;
+                //     }
+                //     case 'AE': {
+                //         response.Message = 'Invalid Login Credentials';
+                //         break;
+                //     }
+                //     default: {
+                //         response.Message = 'Something terrible happened';
+                //         break;
+                //     }
+                // }
 
                 return response;
             } else {
