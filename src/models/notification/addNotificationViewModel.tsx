@@ -1,7 +1,7 @@
 import { ViewModel, IModelAttribute } from "../iModel";
 import AddNotificationRequest from "./addNotificationRequest";
 import AddNotificationResponse from "./addNotificationResponse";
-import NotificationModel from "./NotificationModel";
+import NotificationModel from "./notificationModel";
 import MiddlewareManager from "../../services/middlewareManager";
 
 export default class AddNotificationViewModel extends ViewModel {

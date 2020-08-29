@@ -1,5 +1,5 @@
 import { ViewModel, IModelAttribute } from "../iModel";
-import NotificationModel from "./NotificationModel";
+import NotificationModel from "./notificationModel";
 import MiddlewareManager from "../../services/middlewareManager";
 import UpdateNotificationRequest from "./updateNotificationRequest";
 import UpdateNotificationResponse from "./updateNotificationResponse";

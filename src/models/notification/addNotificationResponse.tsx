@@ -1,5 +1,5 @@
 import {Response, IResponse} from '../iHttpObject'
-import NotificationModel from './NotificationModel';
+import NotificationModel from './notificationModel';
 class AddNotificationResponse extends Response implements IResponse{
     NotificationModel: NotificationModel;
     constructor(props?: IResponse | any ){
