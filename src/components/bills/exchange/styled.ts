@@ -3,6 +3,7 @@ import Modal from 'styled-react-modal';
 import Form from '../../common/form/form';
 import SocialTable from '../../common/table/socialTable'
 import detailForm from '../../common/form/detailForm';
+import { ActivityIndicator } from '../../common/loader/activityIndicator';
 
 export const StyledModal = Modal.styled`
   width: 20rem;
@@ -252,3 +253,4 @@ width: 80%;
 padding: 10px;
 /* background-color: none;${props=> props.theme.colors.background}; */
 `
+export const ActivityIndicatorStyled = styled(ActivityIndicator)``

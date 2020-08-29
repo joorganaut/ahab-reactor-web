@@ -20,7 +20,7 @@ const DialogNotification = (
             case 'error':
                 return <img src={'/icons/gb/cancel.svg'} alt={'notification_error'} />
             case 'success':
-                return <img src={'/icons/gb/checkmark.svg'} alt={'notification_success'} />
+                return <img src={'/icons/gb/ok.svg'} alt={'notification_success'} />
             default:
                 return <img src={'/icons/gb/info.svg'} alt={'notification_info'} />
         }

@@ -5,6 +5,7 @@ import { theme } from '../../../styles/global';
 interface ActivityIndicatorProps {
     show: boolean;
     title: string;
+    display?: boolean;
 }
 const Center = styled.div`
 `
@@ -26,8 +27,8 @@ const toggleIndicator = (show: boolean, title: string) => {
         return (<></>)
     }
 }
-const Indicator = styled.div`
-    position: absolute;
+const Indicator = styled.div<{display?: boolean}>`
+    position: ${props => props.display? 'absolute' : 'none'};
     z-index:5;
     left: 50%;
     right: 0;
@@ -38,9 +39,9 @@ const Indicator = styled.div`
     background-color: #F5FCFF88;
     opacity: 0.5;
 `
-export const ActivityIndicator = ({ ...props }) => {
+export const ActivityIndicator: React.FC<ActivityIndicatorProps> = ({ ...props }) => {
     return (
-        <Indicator>
+        <Indicator display={props.display}>
             {toggleIndicator(props.show, props.title)}
         </Indicator>
     )

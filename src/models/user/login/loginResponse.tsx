@@ -13,7 +13,7 @@ class LoginResponse extends Response implements IResponse {
         super(props);
         this.IsAuthenticated = props === undefined ? false : props.IsAuthenticated;
         this.InstitutionModel = props === undefined ? new InstitutionModel() : props.InstitutionModel;
-        this.UserModel = props === undefined ? new UserModel() : props.UserModel;
+        this.UserModel = props === undefined ? new UserModel() : props.UserServiceModel;
         this.CustomerModel = props === undefined ? new CustomerModel() : props.CustomerModel;
         this.AccountModels = props === undefined ? [] : props.AccountModels;
         this.Error = props === undefined ? '' : props.Error;

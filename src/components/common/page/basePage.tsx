@@ -6,8 +6,7 @@ import BaseProcessor from '../../../models/baseProcessor';
 import MiddlewareManager from '../../../services/middlewareManager';
 import { Wrapper} from '../container/';
 import { WithTranslation } from 'react-i18next';
-import DialogNotification from '../notification/dialogNotification'
-
+import DialogNotification from '../notification/dialogNotification';
 
 class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
     manager: MiddlewareManager;
@@ -29,7 +28,6 @@ class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
         this.manager = new MiddlewareManager();
         this.Notification = new Notification();
     }
-
     renderRedirect = (path?: string, obj?: unknown) => {
         return <Redirect to = {{pathname : path, state : {
             Values : obj

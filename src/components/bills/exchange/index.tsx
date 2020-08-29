@@ -15,6 +15,7 @@ import { SocialTableRowProps } from '../../common/table/socialTable';
 import AllExchangesViewModel from '../../../models/exchange/allExchangesViewModel';
 import ExchangeModel from '../../../models/exchange/exchangeModel';
 import IHttpObject, { ISearchCriteria } from '../../../models/iHttpObject';
+import { ActivityIndicator } from '../../common/loader/activityIndicator';
 
 export interface SearchParametersProps {
     Criteria: Array<ISearchCriteria>;
@@ -49,6 +50,7 @@ const Exchange: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [exchangeModel, setExchangeModel] = useState<ExchangeModel>();
+    const [showLoader, setShowLoader] = useState(false);
     const viewExchange = useCallback((record?: ExchangeModel) => {
         setShowDetailsModal(true);
         setExchangeModel(record);
@@ -63,6 +65,7 @@ const Exchange: React.FC = () => {
     }, [])
     const process = useCallback(
         async () => {
+            setShowLoader(true)
             let recordList: SocialTableRowProps[] = [];
                 let searchParams = new AllExchangesRequest(searchParameters);
                 const viewModel = new AllExchangesViewModel(searchParams)
@@ -80,6 +83,7 @@ const Exchange: React.FC = () => {
                     recordList.push(row);
                 })
                 setRecords(recordList)
+                setShowLoader(false);
         },
         [setCount, viewExchange, setRecords],
     )
@@ -161,6 +165,7 @@ const Exchange: React.FC = () => {
                 </ModalBody>
             </StyledModal>
         </Content>
+    <ActivityIndicator display={showLoader} show={showLoader} title={'Loading Xchanges'}/>
     </>)
 }
 export default Exchange;

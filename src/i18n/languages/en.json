@@ -221,6 +221,45 @@
               "cancelled": "Cancelled"
             }
         },
+        "notification": {
+          "functions": {
+            "add": {
+              "title": "Add Notification",
+              "fields": {
+                "title": "Title",
+                "sender": "From",
+                "recipient": "To",
+                "body": "Body",
+                "status": "Status",
+                "buttons": {
+                  "button1": "Send"
+                }
+              }
+            },
+            "viewDetails":{
+              "title": "View Exchange Details",
+              "fields": {
+                "firstName": "First Name",
+                "lastName": "Last Name",
+                "amount": "Amount",
+                "rate": "Rate",
+                "toCurrency": "To Currency",
+                "fromCurrency": "From Currency",
+                "status": "Status",
+                "buttons": {
+                  "button1": "Accept",
+                  "button2": "Cancel"
+                },
+                "expiryDate": "Expiry Date"
+              }
+            }
+          },
+          "status":{
+            "pending": "Pending",
+            "completed": "Completed",
+            "cancelled": "Cancelled"
+          }
+      },
         "accounts": {
           "home": {
             "title": "Accounts and Transactions History"

@@ -3,7 +3,6 @@ import ExchangeModel from "./exchangeModel";
 import MiddlewareManager from "../../services/middlewareManager";
 import UpdateExchangeRequest from "./updateExchangeRequest";
 import UpdateExchangeResponse from "./updateExchangeResponse";
-import { stat } from "fs";
 
 export default class ExchangeViewModel extends ViewModel {
     constructor(props: ExchangeModel) {

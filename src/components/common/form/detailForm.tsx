@@ -5,7 +5,7 @@ import BasePage from './../page/basePage';
 import { withTranslation, WithTranslation } from 'react-i18next';
 import IModel, { IViewModel } from '../../../models/iModel';
 import { FormContainer, Title, FormSection, Form as FormX } from '../container';
-import { ButtonGroup, ButtonContainer } from '../button';
+import { ButtonContainer } from '../button';
 import IHttpObject, { IRequest, IResponse } from '../../../models/iHttpObject';
 
 interface DetailFormProps extends WithTranslation {
@@ -61,7 +61,7 @@ class DetailForm extends BasePage<DetailFormProps, any> {
                 });
                 await this.alert('Success', response.Message, 'success', () => { });
                 await this.notify('success', response.Message);
-                let v = this.props.onSuccess !== undefined ? this.props.onSuccess(e) : () => { };
+                const v = this.props.onSuccess !== undefined ? this.props.onSuccess(e) : () => { };
             } else {
                 await this.alert('Info', (response.Message !== undefined ? response.Message : response.Error ? response.Error : 'Unable to get info'), 'info', () => { });
                 this.notify('info', (response.Message !== undefined ? response.Message : response.Error))
@@ -91,7 +91,7 @@ class DetailForm extends BasePage<DetailFormProps, any> {
                     {this.state.Title !== undefined ? <Title>{this.state.Title}</Title> : <></>}
                     {this.props.children}
                     {ObjectProcessor.GetProperties(this.state.ViewModel).map((x: string) => {
-                        if (x !== 'Model' && x !== 'Error' && x !== 'Manager' && !x.includes('Button')) {
+                        if (x !== 'Model' && x !== 'Error' && x !== 'Manager' && !x.includes('Button') && x !== 'Context') {
                             if (this.state.ViewModel[x].Type === 'date') {
                                 return (<>
                                     <FormSection>

@@ -9,7 +9,8 @@ import BasePage from './../page/basePage';
 import IModel, { IViewModel } from '../../../models/iModel';
 import IHttpObject, { IRequest, IResponse } from '../../../models/iHttpObject';
 import { withTranslation, WithTranslation } from 'react-i18next';
-import { ButtonGroup, ButtonContainer } from '../button';
+import { AppContext } from '../../../services/contextManager';
+import { ButtonContainer } from '../button';
 interface FormProp extends WithTranslation {
     Model?: IModel;
     ViewModel: IViewModel;
@@ -46,103 +47,110 @@ class Form
         model[e.target.name] = e.target.value;
         viewModel[e.target.name].Value = e.target.value;
         this.setState({ ViewModel: viewModel, Model: model });
-        // alert(JSON.stringify(e.target.name));
     }
-    SubmitAction = async (e: any) => {
+    SubmitAction = async (e: any, context: any) => {
         this.setState({ IsLoading: true, LoadingTitle: 'Please Wait' })
-            let data: IModel[] = [];
-            data.push(this.state.Model);
-            let request: IRequest = {
-                Model: data,
-                ToObject: () => new Promise<IHttpObject>(() => { }),
-                ToString: () => new Promise<string>(() => { })
-            }
-            let response: IResponse = await this.state.ViewModel.SubmitAction(request);
-            if (response !== null) {
-                if (response.Code === '00') {
-                    this.setState({
-                        Redirect: response.Redirect,
-                        RedirectPath: response.RedirectPath,
-                        RedirectParams: response.Model
-                    });
-                    await this.alert('Success', response.Message, 'success', () => { });
-                    await this.notify('success', response.Message);
-                    let v = this.props.onSuccess !== undefined ? this.props.onSuccess(e) : () => { };
-                } else {
-                    await this.alert('Info', (response.Message !== undefined ? response.Message : response.Error ? response.Error : 'Unable to get info'), 'info', () => { });
-                    this.notify('info', (response.Message !== undefined ? response.Message : response.Error))
-                }
-            } else {
-                await this.alert('Error', 'null response', 'error', () => { });
-                this.notify('error', 'null response')
-            }
-            this.setState({ IsLoading: false })
-    }
-    async Submit(e: any) {
-        e.preventDefault();
-        if(this.props.showConfirm){
-            await this.confirm(async () => {
-                await this.SubmitAction(e);
-            })
-        }else{
-            await this.SubmitAction(e)
+        let data: IModel[] = [];
+        data.push(this.state.Model);
+        let request: IRequest = {
+            Model: data,
+            ToObject: () => new Promise<IHttpObject>(() => { }),
+            ToString: () => new Promise<string>(() => { })
         }
-        
+        let response: IResponse = await this.state.ViewModel.SubmitAction(request, context);
+        if (response !== null) {
+            if (response.Code === '00') {
+                this.setState({
+                    Redirect: response.Redirect,
+                    RedirectPath: response.RedirectPath,
+                    RedirectParams: response.Model
+                });
+                await this.alert('Success', response.Message, 'success', () => { });
+                await this.notify('success', response.Message);
+                let v = this.props.onSuccess !== undefined ? this.props.onSuccess(e) : () => { };
+            } else {
+                await this.alert('Info', (response.Message !== undefined ? response.Message : response.Error ? response.Error : 'Unable to get info'), 'info', () => { });
+                this.notify('info', (response.Message !== undefined ? response.Message : response.Error))
+            }
+        } else {
+            await this.alert('Error', 'null response', 'error', () => { });
+            this.notify('error', 'null response')
+        }
+        this.setState({ IsLoading: false })
+    }
+    async Submit(e: any, context: any) {
+        e.preventDefault();
+        if (this.props.showConfirm) {
+            await this.confirm(async () => {
+                await this.SubmitAction(e, context);
+            })
+        } else {
+            await this.SubmitAction(e, context)
+        }
+
     }
     renderPage() {
         return (
             <FormContainer>
-                <FormX method="POST" onSubmit={this.Submit}>
-                    {this.state.Title !== undefined ? <Title>{this.state.Title}</Title> : <></>}
-                    {this.props.children}
-                    {ObjectProcessor.GetProperties(this.state.ViewModel).map((x: string) => {
-                        if (x !== 'Model' && x !== 'Error' && x !== 'Manager' && x !== 'Button') {
-                            if (this.state.ViewModel[x].Type === 'select') {
-                                return (<>
-                                    <FormSection>
-                                        <PrimarySelect
-                                            name={x}
-                                            onSelectChange={this.HandleTextChange}
-                                            label={this.props.t(this.state.ViewModel[x].FieldName)}
-                                            selectedValue={this.state.ViewModel[x].Value}
-                                            data={this.state.ViewModel[x].Options} />
-                                    </FormSection>
-                                </>)
-                            }
-                            if (this.state.ViewModel[x].Type === 'date') {
-                                return (<>
-                                    <FormSection>
-                                        <Input type={this.state.ViewModel[x].Type}
-                                            label={this.props.t(this.state.ViewModel[x].FieldName)}
-                                            name={x}
-                                            min={this.state.ViewModel[x].Min}
-                                            max={this.state.ViewModel[x].Max}
-                                            value={this.state.ViewModel[x].Value} onTextChange={this.HandleTextChange} />
-                                    </FormSection>
-                                </>)
-                            }
-                            return (<>
-                                <FormSection>
-                                    <Input type={this.state.ViewModel[x].Type}
-                                        label={this.props.t(this.state.ViewModel[x].FieldName)}
-                                        name={x}
-                                        value={this.state.ViewModel[x].Value} onTextChange={this.HandleTextChange} />
-                                </FormSection>
-                            </>)
-                        }
-                    })}
-                    <ButtonContainer>
-                        {ObjectProcessor.GetProperties(this.state.ViewModel).filter(x => x.includes('Button')).map((b: any) => {
+                <AppContext.Consumer>
+                    {
+                        value => {
                             return (
-                                <Button name={b} type="primary" onClick={this.Submit}>
-                                    {this.props.t(this.state.ViewModel[b].FieldName)}
-                                </Button>
-                            )
-                        })}
-                    </ButtonContainer>
-                </FormX>
+                                <FormX method="POST" onSubmit={(e) => this.Submit(e, value)}>
+                                {this.state.Title !== undefined ? <Title>{this.state.Title}</Title> : <></>}
+                                {this.props.children}
+                                {ObjectProcessor.GetProperties(this.state.ViewModel).map((x: string) => {
+                                    if (x !== 'Model' && x !== 'Error' && x !== 'Manager' && x !== 'Button' && x !== 'Context') {
+                                        if (this.state.ViewModel[x].Type === 'select') {
+                                            return (<>
+                                                <FormSection>
+                                                    <PrimarySelect
+                                                        name={x}
+                                                        onSelectChange={this.HandleTextChange}
+                                                        label={this.props.t(this.state.ViewModel[x].FieldName)}
+                                                        selectedValue={this.state.ViewModel[x].Value}
+                                                        data={this.state.ViewModel[x].Options} />
+                                                </FormSection>
+                                            </>)
+                                        }
+                                        if (this.state.ViewModel[x].Type === 'date') {
+                                            return (<>
+                                                <FormSection>
+                                                    <Input type={this.state.ViewModel[x].Type}
+                                                        label={this.props.t(this.state.ViewModel[x].FieldName)}
+                                                        name={x}
+                                                        min={this.state.ViewModel[x].Min}
+                                                        max={this.state.ViewModel[x].Max}
+                                                        value={this.state.ViewModel[x].Value} onTextChange={this.HandleTextChange} />
+                                                </FormSection>
+                                            </>)
+                                        }
+                                        return (<>
+                                            <FormSection>
+                                                <Input type={this.state.ViewModel[x].Type}
+                                                    label={this.props.t(this.state.ViewModel[x].FieldName)}
+                                                    name={x}
+                                                    value={this.state.ViewModel[x].Value} onTextChange={this.HandleTextChange} />
+                                            </FormSection>
+                                        </>)
+                                    }
+                                })}
+                                <ButtonContainer>
+                                    {ObjectProcessor.GetProperties(this.state.ViewModel).filter(x => x.includes('Button')).map((b: any) => {
+                                        return (
+                                            <Button name={b} type="primary" onClick={(e) => { this.Submit(e, value) }}>
+                                                {this.props.t(this.state.ViewModel[b].FieldName)}
+                                            </Button>
+                                        )
+                                    })}
+                                </ButtonContainer>
+                            </FormX>          
+                                    )
+                        }
+                    }
+                </AppContext.Consumer>
             </FormContainer>
-            )
+        )
     }
     render() {
         return (<>
@@ -150,4 +158,5 @@ class Form
         </>)
     }
 }
+Form.contextType = AppContext;
 export default withTranslation()(Form);

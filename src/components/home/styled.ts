@@ -197,6 +197,7 @@ export const SideNavMenuItem = styled.a`
 display: grid;
 grid-template-rows: 1fr 1fr;
 /* background-color: #03567C; */
+position: relative;
 box-shadow: -2px 0px 10px 0px rgba(18, 67, 99, 0.51);
 &:hover {
    transform: scale(1.1); 
@@ -207,6 +208,28 @@ export const SideNavMenuItemIcon = styled.img`
   height: 50px;
   width: 50px;
   fill: white; 
+`
+
+
+export const SideNavMenuItemBadge = styled.div`
+display: block;
+justify-content: center;
+  height: 20px;
+  width: 20px;
+  fill: white; 
+  border-radius: 50px;
+  position: absolute;
+  background-color: ${props => props.theme.colors.error};
+  left: 55px;
+  bottom: 70px;
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  &:hover {
+   transform: scale(1.5); 
+   transition: all .2s ease-in-out;
+   color: ${props => props.theme.colors.border};
+   }
 `
 export const SideNavMenuItemLabel = styled.span`
   font-size: 0.5rem;

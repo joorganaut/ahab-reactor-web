@@ -6,6 +6,7 @@ export const theme = {
     primaryLight: '#EFFFFA',
     primaryHover: '#343078',
     compliment: '#FFA500',
+    star: '#fffa86',
     lightPrimary: '#f7f4ff',
     secondary: '#343D4B',
     outline: '#F6F6F9',

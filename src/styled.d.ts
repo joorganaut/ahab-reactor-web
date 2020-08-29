@@ -6,6 +6,7 @@ interface ThemeColours {
   primaryLight: string
   primaryHover: string
   compliment: string
+  star: string
   lightPrimary: string
   secondary: string
   outline: string

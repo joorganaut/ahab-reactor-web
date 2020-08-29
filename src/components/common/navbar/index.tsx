@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from "styled-components";
 import { useSpring, animated, config } from "react-spring";
 import Brand from "./brand";
@@ -7,8 +7,7 @@ import { Button } from '../button';
 import useI18n from '../../../hooks/useI18n';
 import { useHistory } from 'react-router-dom';
 import { NameLabel } from '../label';
-import DialogNotification from '../notification/dialogNotification'
-
+import DialogNotification from '../notification/dialogNotification';
 
 
 
@@ -26,8 +25,9 @@ const Navbar = (props: any) => {
   });
   const { t } = useI18n();
   const history = useHistory();
+  const [id, setID] = useState(props.id);
   const onLogout = (e: any): void => {
-
+    props.context.actions.setAuthDetails(id, null);
     history.push('/')
   }
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
