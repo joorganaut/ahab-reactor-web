@@ -8,32 +8,37 @@ import {
     NotificationListItemSenderDate,
     NotificationListItemIcon
  } from './styled';
-
+import moment from 'moment';
 
 export interface NotificationListItemProps {
-    // ID: number;
-    // Title: string;
-    // Status: 'read' | 'unread' | 'deleted';
-    // Date: Date;
-    // Summary: string;
-    // From: string;
+    ID: number;
+    Title: string;
+    Status: 'read' | 'unread' | 'deleted';
+    Date: Date;
+    Summary: string;
+    From: string;
+    Template: string;
+    viewAction: () => void;
 }
 const NotificationListItem: React.FC<NotificationListItemProps> = ({ ...props }) => {
-
-    return <NotificationListItemContainer status={'unread'} onClick={()=> alert('hello world')}>
+    const getDate = () => {
+        let momentDate = moment(props.Date).toDate();
+        return momentDate.toDateString()
+    }
+    return <NotificationListItemContainer status={'unread'} onClick={()=> props.viewAction()}>
         <NotificationListItemSender>
             <NotificationListItemSenderName>
-                <NotificationListItemIcon src={'/icons/gb/info.svg'}/> Xchange
+                <NotificationListItemIcon src={'/icons/gb/info.svg'}/> {props.From}
             </NotificationListItemSenderName>
             <NotificationListItemSenderDate>
-                28/8/2020 10:15pm
+                {getDate()}
             </NotificationListItemSenderDate>
         </NotificationListItemSender>
         <NotificationListItemTitle>
-            Welcome to Xchange
+            {props.Title}
         </NotificationListItemTitle>
         <NotificationListItemSummary>
-            Xchange is the leading informal FX exchange platform...
+            {props.Summary}...
         </NotificationListItemSummary>
     </NotificationListItemContainer>
 }

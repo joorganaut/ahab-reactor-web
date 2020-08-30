@@ -60,25 +60,12 @@ const SocialTableRow: React.FC<SocialTableRowProps> = ({ ...props }) => {
                 <Amount>${return2DecimalPlace(props.record? props.record.Amount : 0)}</Amount>
                 <Rate>Rate: {return2DecimalPlace(props.record? props.record.Rate : 0)}</Rate>
             </AmountAndRateContainer>
-            {/* <NameContainer> */}
-                {/* Osazee Igbinosun */}
-                {/* {`${props.record? props.record.FirstName : ''} ${props.record? props.record.LastName : ''}`}  */}
-            {/* </NameContainer> */}
-            {/* <ContactContainer> */}
-                {/* <Mobile>{props.record? props.record.PhoneNumber : ''}</Mobile>
-                <Email>{props.record? props.record.Email : ''}</Email> */}
-                {/* <Mobile>+1-647-679-1133</Mobile> */}
-                {/* <Email>sazeespectra@gmail.com</Email> */}
-            {/* </ContactContainer> */}
             <ClockContainer>
                 <Clock>
                 <Countdown date={props.record?
                  props.record.ExpiryDate : ''} daysInHours/>
                  </Clock>
-            </ClockContainer>
-            {/* <ViewButtonContainer>
-                <ViewButton src={'/icons/gb/contacts.svg'} />
-            </ViewButtonContainer> */}           
+            </ClockContainer>         
         </SocialTableRowContainer>
          </ViewLink>
     )

@@ -7,6 +7,7 @@ import MiddlewareManager from '../../../services/middlewareManager';
 import { Wrapper} from '../container/';
 import { WithTranslation } from 'react-i18next';
 import DialogNotification from '../notification/dialogNotification';
+import { AppContext } from '../../../services/contextManager';
 
 class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
     manager: MiddlewareManager;
@@ -22,11 +23,15 @@ class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
             Redirect:  props.Redirect === undefined ? false : props.Redirect,
             RedirectPath:  props.RedirectPath === undefined ? '/' : props.RedirectPath,
             RedirectParams: props.RedirectParams === undefined ? {} : props.RedirectParams,
-            User: props.User === undefined ? {} : props.User
+            User: props.User === undefined ? {} : props.User,
+            IsAuthenticated: false,
+            Context: {}
         }
-        
         this.manager = new MiddlewareManager();
         this.Notification = new Notification();
+    }
+    setAppContext(context: any){
+        this.setState({Context: context})
     }
     renderRedirect = (path?: string, obj?: unknown) => {
         return <Redirect to = {{pathname : path, state : {
@@ -84,8 +89,14 @@ class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
     }
     render(){
         return(<Wrapper>
+            <AppContext.Consumer>
+                {
+                    (context) => {return(<>{this.setAppContext(context)}</>)}
+                }
+            </AppContext.Consumer>
             {this.renderAllComponents()}           
         </Wrapper>)
     }
 }
+BasePage.contextType = AppContext;
 export default BasePage;

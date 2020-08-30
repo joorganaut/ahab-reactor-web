@@ -7,6 +7,7 @@ import IModel, { IViewModel } from '../../../models/iModel';
 import { FormContainer, Title, FormSection, Form as FormX } from '../container';
 import { ButtonContainer } from '../button';
 import IHttpObject, { IRequest, IResponse } from '../../../models/iHttpObject';
+import { AppContext } from '../../../services/contextManager';
 
 interface DetailFormProps extends WithTranslation {
     Model?: IModel;
@@ -28,16 +29,20 @@ class DetailForm extends BasePage<DetailFormProps, any> {
             Model: props.Model,
             BackgroundColor: props.color,
             Title: props.title,
-            IsLoading: true,
-            currentAction: ''
+            IsLoading: false,
+            currentAction: '',
         }
         this.state.ViewModel.SubmitAction = this.state.ViewModel.SubmitAction.bind(this);
         this.Submit = this.Submit.bind(this);
     }
     componentDidMount() {
-        setInterval(() => {
-            this.setState({ IsLoading: false, LoadingTitle: 'Loading' })
-        }, 1000)
+        // setInterval(() => {
+        //     this.setState({ IsLoading: false, LoadingTitle: 'Loading' })
+        // }, 1000)
+    }
+    ShowOnAuthentication(visibleIfAuthenticated: boolean){
+        let auth = this.context.actions.getAuthDetails();
+        return (auth !== null && visibleIfAuthenticated)
     }
 
     async SubmitAction(e: any) {
@@ -51,7 +56,7 @@ class DetailForm extends BasePage<DetailFormProps, any> {
         }
         const extraParams = this.state.ViewModel[this.state.currentAction].Options;
         
-        let response: IResponse = await this.state.ViewModel[this.state.currentAction].Value(request, extraParams.value);
+        let response: IResponse = await this.state.ViewModel[this.state.currentAction].Value(request, extraParams.value, this.context);
         if (response !== null) {
             if (response.Code === '00') {
                 this.setState({
@@ -83,11 +88,16 @@ class DetailForm extends BasePage<DetailFormProps, any> {
         }
 
     }
+    
     renderPage = () => {
 
         return (
             <FormContainer>
-                <FormX method="POST" onSubmit={this.Submit}>
+                <AppContext.Consumer>
+                    {
+                        (context) => {
+                            return(<>
+                            <FormX method="POST" onSubmit={this.Submit}>
                     {this.state.Title !== undefined ? <Title>{this.state.Title}</Title> : <></>}
                     {this.props.children}
                     {ObjectProcessor.GetProperties(this.state.ViewModel).map((x: string) => {
@@ -110,15 +120,18 @@ class DetailForm extends BasePage<DetailFormProps, any> {
                     <ButtonContainer>
                         {ObjectProcessor.GetProperties(this.state.ViewModel).filter(x => x.includes('Button')).map((b: string) => {
                             return (
-                                <Button name={b} type="primary" onClick={(e: any)=>{this.setState({currentAction: b}); this.Submit(e)}}>
+                                <Button disabled={!this.ShowOnAuthentication(this.state.ViewModel[b].VisibleIfNotAuthenticated)} name={b} type="primary" onClick={(e: any)=>{this.setState({currentAction: b}); this.Submit(e)}}>
                                     {this.props.t(this.state.ViewModel[b].FieldName)}
                                 </Button>
                             )
                         })}
                     </ButtonContainer>
                 </FormX>
+                            </>)
+                        }
+                    }
+                </AppContext.Consumer>
             </FormContainer >
-
         )
     }
     render() {
@@ -127,4 +140,5 @@ class DetailForm extends BasePage<DetailFormProps, any> {
         </>)
     }
 }
+DetailForm.contextType = AppContext;
 export default withTranslation()(DetailForm);

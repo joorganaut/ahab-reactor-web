@@ -23,8 +23,8 @@ text-decoration: none;
 `
 export const ContentWrapper = styled.div<{bg?: string}>`
 position: relative;
-height: auto;
-top: 50px;
+height: 90%;
+top: 40px;
 margin: 20px;
 padding: 20px;
 background-color: ${props => props.theme.colors.background};

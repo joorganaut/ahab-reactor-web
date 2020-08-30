@@ -140,7 +140,7 @@ grid-template-rows: 1fr 10fr 1fr;
 grid-column-gap: 5px;
 position: relative;
 margin: 20px;
-height: 60%;
+height: 100%;
 justify-items: center;
 `
 export const ToolBar = styled.ul`

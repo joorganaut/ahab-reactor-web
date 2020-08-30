@@ -3,7 +3,6 @@ import LoginRequest from "./loginRequest";
 import LoginResponse from "./loginResponse";
 import LoginModel from "./loginModel";
 import MiddlewareManager from "../../../services/middlewareManager";
-import ContextManager, { AppContext } from "../../../services/contextManager";
 
 export default class LoginViewModel extends ViewModel {
     constructor(model: LoginModel) {
@@ -29,7 +28,6 @@ export default class LoginViewModel extends ViewModel {
                 switch (response.Code) {
                     case '00': {
                         context.actions.setAuthDetails(response.UserModel.ID?.toString()?? '', response.RedirectParams);
-                        const test = context.actions.getAuthDetails();
                         response.Message = 'Welcome';
                         response.Redirect = true;
                         response.RedirectPath = '/dashboard';

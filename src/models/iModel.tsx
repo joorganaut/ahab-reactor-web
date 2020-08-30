@@ -9,6 +9,7 @@ export default interface IModel {
     ID?: number;
     InstitutionCode?: string;
     IsEnabled?: boolean;
+    createdAt?: Date;
     DateCreated?: Date;
     DateLastModified?: Date;
     CreatedBy?: number;
@@ -22,6 +23,7 @@ export interface IModelAttribute {
     Inputs?: any;
     Min?: string;
     Max?: string;
+    VisibleIfNotAuthenticated?: boolean;
 }
 
 export interface IViewModel {
@@ -61,10 +63,12 @@ export class Model implements IModel {
         this.InstitutionCode = model === undefined ? '' : model.InstitutionCode;
         this.IsEnabled = model === undefined ? false : model.IsEnabled;
         this.DateCreated = model === undefined ? new Date() : model.DateCreated;
+        this.createdAt = model === undefined ? new Date() : model.createdAt;
         this.DateLastModified = model === undefined ? new Date() : model.DateLastModified;
         this.CreatedBy = model === undefined ? 0 : model.CreatedBy;
         this.LastModifiedBy = model === undefined ? 0 : model.LastModifiedBy;
     }
+    createdAt?: Date;
     IsEnabled?: boolean;
     DateCreated?: Date;
     DateLastModified?: Date;

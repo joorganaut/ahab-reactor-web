@@ -27,10 +27,12 @@ grid-template-rows: ${props => {
     }};
 grid-gap: 5px;
 height: 100%;
+overflow-y: scroll;
+overflow-x: hidden;
 `
 export const NotificationBodyContainer = styled.div`
 display: grid;
-grid-template-rows: 1fr 3fr;
+grid-template-rows: 0.2fr 3fr;
 grid-gap: 5px;
 background-color: ${props => props.theme.colors.background};
 border-radius: 6px;
@@ -48,6 +50,7 @@ display: grid;
 grid-template-rows: 1fr 1fr;
 border-radius: 6px;
 padding: 15px;
+height: fit-content;
 `
 export const NotificationBodyHeaderMain = styled.div`
 font-weight: 900;
@@ -81,11 +84,15 @@ grid-template-rows: 1fr 0.8fr 0.5fr;
 padding: 15px;
 background-color: ${props => props.theme.colors.background};
 border-radius: 6px;
+height: 120px;
 &:hover {
     transform: scale(1.01); 
     transition: all .2s ease-in-out;
      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
      background-color: ${props => props.theme.colors.brand};
+    }
+    &:active {
+        background-color: ${props => props.theme.colors.primary};
     }
 `
 
@@ -99,6 +106,7 @@ font-size: 20px;
 text-align: left;
 align-self: center;
 color: ${props => props.theme.colors.banner1};
+white-space: nowrap;
 `
 export const NotificationListItemIcon = styled.img`
 height: 20px;

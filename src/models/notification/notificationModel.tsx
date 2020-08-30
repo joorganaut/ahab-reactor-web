@@ -5,7 +5,7 @@ export default class NotificationModel extends Model{
     Sender?: string;
     Recipient?: string;
     Body?: string;
-    Template?: string;
+    Template?: 'welcome' | 'add-xchange' | 'approval-request-sender'  | 'approval-request' | 'cancel' | 'general' |  'approval-response' | 'contact-details' | null;
     Status?: 'read' | 'unread' | 'deleted';
     constructor(props?: any){
         super(props);
@@ -13,7 +13,7 @@ export default class NotificationModel extends Model{
         this.Sender = props === undefined ? '' :  props.Sender;
         this.Recipient = props === undefined ? '' : props.Recipient;
         this.Body = props === undefined ? '' :  props.Body;
-        this.Template = props === undefined ? '' :  props.Template;
+        this.Template = props === undefined ? null :  props.Template;
         this.Status = props === undefined ? 'unread' :  props.Status;
     }
 }

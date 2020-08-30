@@ -3,7 +3,8 @@ import ExchangeModel from "./exchangeModel";
 import MiddlewareManager from "../../services/middlewareManager";
 import UpdateExchangeRequest from "./updateExchangeRequest";
 import UpdateExchangeResponse from "./updateExchangeResponse";
-
+import AddNotificationRequest from "../notification/addNotificationRequest";
+import NotificationModel from "../notification/notificationModel";
 export default class ExchangeViewModel extends ViewModel {
     constructor(props: ExchangeModel) {
         super(props);
@@ -21,8 +22,8 @@ export default class ExchangeViewModel extends ViewModel {
         this.ToCurrency = {
             FieldName: "dashboard.exchange.functions.viewDetails.fields.toCurrency", Type: "text", Value: props.ToCurrency
         };
-        this.Button1= { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button1", Type: "button", Value: this.SubmitAction, Options: { value: 'in-progress' } }
-        this.Button2 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button2", Type: "button", Value: this.SubmitAction, Options: { value: 'cancelled' } }
+        this.Button1= { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button1", Type: "button", Value: this.SubmitAction, Options: { value: 'in-progress' }, VisibleIfNotAuthenticated: true }
+        this.Button2 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button2", Type: "button", Value: this.SubmitAction, Options: { value: 'cancelled' }, VisibleIfNotAuthenticated: false }
 
     }
     Error: IModelAttribute;
@@ -37,7 +38,7 @@ export default class ExchangeViewModel extends ViewModel {
     Button1: IModelAttribute;
     Button2: IModelAttribute;
     
-    async SubmitAction(params: UpdateExchangeRequest, status?: 'in-progress' | 'cancelled' | 'completed'): Promise<UpdateExchangeResponse | void> {
+    async SubmitAction(params: UpdateExchangeRequest, status?: 'in-progress' | 'cancelled' | 'completed', context?: any): Promise<UpdateExchangeResponse | void> {
         const getResponseFromStatus = (status?: 'in-progress' | 'cancelled' | 'completed') => {
             switch(status){
                 case 'in-progress':{
@@ -58,6 +59,7 @@ export default class ExchangeViewModel extends ViewModel {
             let data: ExchangeModel = params.Model !== undefined ? params?.Model[0] : {}
             data.InstitutionCode = masterView.MasterCode();
             data.Status = status;
+            let auth = context.actions.getAuthDetails();
             let request = new UpdateExchangeRequest(data);
             let token = await masterView.GetToken("sazeespectra@gmail.com", "string")
             if (token.Code !== '00') {
@@ -76,6 +78,30 @@ export default class ExchangeViewModel extends ViewModel {
                         response.Message = `Successfully ${await getResponseFromStatus(status)} the Exchange`;
                         response.Redirect = true;
                         response.RedirectPath = '/dashboard/exchange';
+                        let notification = new AddNotificationRequest(new NotificationModel({
+                            Title: "Transaction Accepted",
+                            Sender: "Xchange Team",
+                            Recipient: data.RequesterUserID,
+                            Template: "approval-request",
+                            Body: `Your transaction has been accepted, please {action} the acceptance to exchange contact details`,
+                            Status: 'unread'
+                        }));
+                        notification.Config = {
+                            headers: { Authorization: `Bearer ${token.Token}` }
+                        }
+                        let notification2 = new AddNotificationRequest(new NotificationModel({
+                            Title: "Transaction Accepted",
+                            Sender: "Xchange Team",
+                            Recipient: auth.Model.UserModel.ID,
+                            Template: "approval-request-sender",
+                            Body: `You accepted a transaction, a notification has been sent to the requester, contact details would be shared up-on approval please bear with us.`,
+                            Status: 'unread'
+                        }));
+                        notification2.Config = {
+                            headers: { Authorization: `Bearer ${token.Token}` }
+                        }
+                        await this.Manager.PostData(notification2);
+                        //TODO: Notify requester
                         break;
                     }
                     default: {

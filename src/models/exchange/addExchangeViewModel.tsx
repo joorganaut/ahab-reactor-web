@@ -3,6 +3,8 @@ import AddExchangeRequest from "./addExchangeRequest";
 import AddExchangeResponse from "./addExchangeResponse";
 import ExchangeModel from "./exchangeModel";
 import MiddlewareManager from "../../services/middlewareManager";
+import AddNotificationRequest from "../notification/addNotificationRequest";
+import NotificationModel from "../notification/notificationModel";
 const datePlus = (days?: number) => {
     let result = new Date();
     result.setDate(new Date().getDate() + (days ? days : 1))
@@ -37,7 +39,7 @@ export default class AddExchangeViewModel extends ViewModel {
     };
     // Status: IModelAttribute = { FieldName: "dashboard.exchange.functions.viewDetails.fields.status", Type: "select", Value: '', Options: ['pending' , 'completed' , 'cancelled'] };
     Button: IModelAttribute = { FieldName: "dashboard.exchange.functions.add.fields.buttons.button1", Type: "button", Value: this.SubmitAction }
-    async SubmitAction(params: AddExchangeRequest): Promise<AddExchangeResponse | void> {
+    async SubmitAction(params: AddExchangeRequest, context?: any): Promise<AddExchangeResponse | void> {
         this.Manager = new MiddlewareManager();
         let response: AddExchangeResponse;
         let masterView = new ViewModel();
@@ -45,6 +47,8 @@ export default class AddExchangeViewModel extends ViewModel {
             let data: ExchangeModel = params.Model !== undefined ? params?.Model[0] : {}
             data.InstitutionCode = masterView.MasterCode();
             data.Status = 'pending';
+            let auth = context.actions.getAuthDetails();
+            data.RequesterUserID = auth.Model.UserModel.ID;
             let request = new AddExchangeRequest(data);
             let token = await masterView.GetToken("sazeespectra@gmail.com", "string")
             if (token.Code !== '00') {
@@ -60,9 +64,22 @@ export default class AddExchangeViewModel extends ViewModel {
             if (!ViewModel.IsNullOrUndefined(response)) {
                 switch (response.Code) {
                     case '00': {
+                        //notify user
                         response.Message = 'Transaction Successful,\n TransactionRef: ' + response.TransactionRef;
                         response.Redirect = true;
                         response.RedirectPath = '/dashboard/exchange';
+                        let notification = new AddNotificationRequest(new NotificationModel({
+                            Title: "Transaction Successful",
+                            Sender: "Xchange Team",
+                            Recipient: auth.Model.UserModel.ID,
+                            Template: "add-xchange",
+                            Body: `Your request has been logged with transaction reference: "${response.TransactionRef}"`,
+                            Status: 'unread'
+                        }));
+                        notification.Config = {
+                            headers: { Authorization: `Bearer ${token.Token}` }
+                        }
+                        await this.Manager.PostData(notification);
                         break;
                     }
                     default: {
