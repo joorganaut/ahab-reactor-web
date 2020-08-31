@@ -34,7 +34,7 @@ export default class AllNotificationsViewModel extends ViewModel {
                 switch (response.Code) {
                     case '00': {
                         response.Redirect = true;
-                        response.RedirectPath = '/dashboard/messsages';
+                        response.RedirectPath = '/dashboard/messages';
                         break;
                     }
                     default: {

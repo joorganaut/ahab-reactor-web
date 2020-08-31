@@ -59,19 +59,16 @@ const NotificationDashboard: React.FC = () => {
     }, [])
     const GetAllNotifications = useCallback(async () => {
         setShowLoader(true)
+        let auth = context.actions.getAuthDetails();
+        let criteria = {fieldName: 'Recipient', fieldValue : auth.Model.UserModel.ID};
+        let search = searchParameters;
+        search.Criteria.push(criteria);
+        search.Criteria.push({fieldName: 'Status', fieldValue : 'unread'});
         let notifications: NotificationListItemProps[] = [];
-        let searchParams = new AllNotificationsRequest(searchParameters);
+        let searchParams = new AllNotificationsRequest(search);
         const viewModel = new AllNotificationsViewModel(searchParams)
         let r = await viewModel.SubmitAction(searchParams);
         let model = r.Model;
-        // model = model?.sort((a, b) => {
-        //     if ((a?.DateCreated?? new Date()) > (b?.DateCreated?? new Date()))
-        //         return 1
-        //     if ((a?.DateCreated?? new Date()) < (b?.DateCreated?? new Date()))
-        //         return 0
-        //     else
-        //         return -1
-        // })
         model?.forEach(element => {
             let n: NotificationModel = new NotificationModel(element);
             let row: NotificationListItemProps = {

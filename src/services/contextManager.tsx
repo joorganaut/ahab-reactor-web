@@ -60,11 +60,14 @@ export default class ContextManager extends React.Component<ContextManagerProps,
     }
     componentDidMount = async ()=>{
         let searchParams = new AllNotificationsRequest({
-            Criteria: [{fieldName : 'Status', fieldValue: 'unread'}],
+            Criteria: [
+                {fieldName : 'Status', fieldValue: 'unread'},
+                {fieldName: 'Recipient', fieldValue : this.getAuthDetails().Model.UserModel.ID},
+            ],
             page: 0,
-            pageSize: 10,
+            pageSize: 100,
             sort: 'createdAt',
-            direction: Direction.asc,
+            direction: Direction.desc,
             ToString: () => { return null },
             ToObject: (value: string) => { return null }
         });
