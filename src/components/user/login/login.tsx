@@ -1,14 +1,13 @@
 import React from 'react';
 import { Form } from '../../../components/common/form/';
 import { FormSection } from '../../../components/common/container/'
-import { GoogleButton, GoogleButtonX, FacebookButton } from '../../../components/common/button/';
+import { GoogleButtonX, FacebookButton } from '../../../components/common/button/';
 import LoginViewModel from '../../../models/user/login/loginViewModel';
 import LoginModel from '../../../models/user/login/loginModel';
 import BasePage from './../../common/page/basePage';
 import { LogoMedium } from '../../common/logo/';
 import styled from 'styled-components/macro';
 import { withTranslation, WithTranslation } from 'react-i18next';
-import LoginRequest from '../../../models/user/login/loginRequest';
 import {AppContext} from '../../../services/contextManager';
 import GoogleLoginRequest from '../../../models/user/login/googleLoginRequest';
 
