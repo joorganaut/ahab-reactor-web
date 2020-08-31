@@ -42,6 +42,12 @@ class DashBoard extends BasePage<DashBoardProps, any> {
         this.Content = (<></>);
     }
     componentDidMount() {
+        const context = this.context;
+        const auth = context.actions.getAuthDetails();
+        if(auth === null){
+            this.setState({Redirect: true, RedirectPath : '/'})
+            return;
+        }
         this.setState({ IsLoading: true, LoadingTitle: 'Loading' });
         switch (this.state.urlQuery) {
             case 'exchange': {
@@ -79,7 +85,7 @@ class DashBoard extends BasePage<DashBoardProps, any> {
         return result;
     }
     getNotifications(context: any){
-        return context.actions.getNotifications()
+        return context.state.Notifications;
     }
     toggleState = (e: any) => {
         this.setState({
@@ -152,4 +158,5 @@ class DashBoard extends BasePage<DashBoardProps, any> {
         </>)
     }
 }
+DashBoard.contextType = AppContext;
 export default withTranslation()(DashBoard);

@@ -80,6 +80,7 @@ export default class AddExchangeViewModel extends ViewModel {
                             headers: { Authorization: `Bearer ${token.Token}` }
                         }
                         await this.Manager.PostData(notification);
+                        context.actions.refreshNotifications();
                         break;
                     }
                     default: {

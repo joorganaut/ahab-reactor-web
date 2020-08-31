@@ -1,4 +1,9 @@
 import React, { createContext } from 'react';
+import { NotificationListItemProps } from '../components/notification/notificationListItem';
+import AllNotificationsRequest from '../models/notification/allNotificationsRequest';
+import AllNotificationsViewModel from '../models/notification/allNotificationsViewModel';
+import NotificationModel from '../models/notification/notificationModel';
+import { Direction } from '../components/common/pager';
 
 interface ContextProps {
     state: any;
@@ -11,6 +16,7 @@ interface ContextManagerState {
     AuthDetails: any;
     Notifications: number;
     ID: string
+    Test: number
 }
 export const AppContext = createContext<ContextProps>({ state: {}, actions: {} })
 export default class ContextManager extends React.Component<ContextManagerProps, ContextManagerState>{
@@ -19,7 +25,8 @@ export default class ContextManager extends React.Component<ContextManagerProps,
         this.state = {
             AuthDetails: {},
             Notifications: 0,
-            ID: ''
+            ID: '',
+            Test: 0
         }
         this.setAuthDetails = this.setAuthDetails.bind(this);
         this.getAuthDetails = this.getAuthDetails.bind(this);
@@ -36,8 +43,28 @@ export default class ContextManager extends React.Component<ContextManagerProps,
             this.setState({ ID: id, AuthDetails: value }, ()=>{localStorage.setItem('UserID', id); localStorage.setItem(id, JSON.stringify(value))});
         }
     }
+    test(){
+        this.setState({Test : this.state.Test + 1})
+    }
+    refreshNotifications = async () => {
+        await this.componentDidMount();
+    }
     getNotifications(){
-        return 5;
+        return this.state.Notifications;
+    }
+    componentDidMount = async ()=>{
+        let searchParams = new AllNotificationsRequest({
+            Criteria: [{fieldName : 'Status', fieldValue: 'unread'}],
+            page: 0,
+            pageSize: 10,
+            sort: 'createdAt',
+            direction: Direction.asc,
+            ToString: () => { return null },
+            ToObject: (value: string) => { return null }
+        });
+        const viewModel = new AllNotificationsViewModel(searchParams)
+        let r = await viewModel.SubmitAction(searchParams);
+        this.setState({ Notifications : r.Model?.length?? 0});
     }
     render() {
         return (
@@ -49,7 +76,9 @@ export default class ContextManager extends React.Component<ContextManagerProps,
                     actions: {
                         getAuthDetails: ()=>this.getAuthDetails(),
                         setAuthDetails: (id: string, value: any) => this.setAuthDetails(id, value),
-                        getNotifications: () => this.getNotifications()
+                        getNotifications: () => this.getNotifications(),
+                        refreshNotifications: () => this.refreshNotifications(),
+                        test: () => this.test()
                     }
                 }
             }>

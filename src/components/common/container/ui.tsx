@@ -1,8 +1,8 @@
 import styled from 'styled-components/macro'
 
 export const FormContainer = styled.div`
-  padding: 10px;
   width: 100%;
+  padding: 20px;
 `
 
 export const Form = styled.form`

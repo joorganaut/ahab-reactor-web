@@ -246,11 +246,18 @@ export const AllExchangesWrapper = styled.div`
 margin: 0px 20px 0px 20px;
 position: relative;
 overflow-y: hidden;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+scrollbar-width: none; /* Firefox */
+-ms-overflow-style: none;  /* Internet Explorer 10+ */
 height: 100%;
-width: 80%;
+width: 70%;
 padding: 10px;
 /* background-color: none;${props=> props.theme.colors.background}; */
+@media screen and (max-width: ${props => props.theme.breakpoints.small}){
+width: 100%;
+align-items: center;
+grid-template-columns: 1fr;
+position: absolute;
+        /* left: -6%; */
+    }
 `
 export const ActivityIndicatorStyled = styled(ActivityIndicator)``

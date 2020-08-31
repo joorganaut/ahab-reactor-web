@@ -209,7 +209,8 @@
                   "status": "Status",
                   "buttons": {
                     "button1": "Accept",
-                    "button2": "Cancel"
+                    "button2": "Cancel",
+                    "button3": "Close"
                   },
                   "expiryDate": "Expiry Date"
                 }

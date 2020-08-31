@@ -1,4 +1,4 @@
 import Login from './login/login';
-import { SignInForm } from './login/signin'
+import SignUp from './signup';
 export default Login;
-export {SignInForm};
+export {SignUp};

@@ -9,25 +9,23 @@ import { LogoMedium } from '../../common/logo/';
 import styled from 'styled-components/macro';
 import { withTranslation, WithTranslation } from 'react-i18next';
 const LoginWrapper = styled.div`
-position: relative;
     display: grid;
-    grid-template-columns: 2fr 2fr;
-    grid-gap: 100px;
-    margin: 0px 20px 0px 20px;
-    width: 60%;
-    left: 15%;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    padding: 20px 20px 20px 20px;
+    width: 100%;
+    justify-content: center;
     @media screen and (max-width: ${props => props.theme.breakpoints.small}){
         width: 100%;
         align-items: center;
         grid-template-columns: 1fr;
         position: absolute;
-        left: -6%;
+        /* left: -6%; */
     }
     `
 const LoginImageWrapper = styled.div`
-        width: 100%;
-        max-height: 50%;
-        margin: 0px 20px 0px 100px;
+        width: auto;
+        margin: 20px 20px 20px 20px;
         @media screen and (max-width: ${props => props.theme.breakpoints.small}){
         display: none;
     }
@@ -37,13 +35,14 @@ const LoginFormWrapper = styled.div`
     border-width: 2px;
     border-color: ${props => props.theme.colors.border};
     border-radius: 15px;
-    margin: 10px;
+    margin: 20px;
     opacity: 80%;   
+    width: fit-content;
     background-color: ${props => props.theme.colors.background};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
 const LoginImage = styled.img`
-        width: 100%;
+        /* width: 100%; */
         /* opacity: 85%; */
     `
 const LoginForm = styled(Form)`
@@ -54,8 +53,8 @@ display: grid;
 grid-template-rows: 1fr 1fr;
 color: ${props => props.theme.colors.primary};
 text-decoration: none;
-/* left: 25%;
-bottom: 10px; */
+/* left: 25%;*/
+bottom: 10px; 
 width: 100%;
 margin: auto;
 position: relative;
@@ -99,7 +98,7 @@ class Login extends BasePage<LoginProps, any>{
                     </LoginForm>
                     <LoginFooter>
                     <LoginFooterItem href={'/passwordrecovery'}>{this.props.t('auth.forgotPassword')}</LoginFooterItem>
-                    <LoginFooterItem href={'/user/signup'} >{this.props.t('auth.signUp')}</LoginFooterItem>
+                    <LoginFooterItem href={'/user'} >{this.props.t('auth.signUp')}</LoginFooterItem>
                     </LoginFooter>
                 </LoginFormWrapper>
             </LoginWrapper>

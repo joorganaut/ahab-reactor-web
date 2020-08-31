@@ -23,7 +23,7 @@ export default class ExchangeViewModel extends ViewModel {
             FieldName: "dashboard.exchange.functions.viewDetails.fields.toCurrency", Type: "text", Value: props.ToCurrency
         };
         this.Button1= { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button1", Type: "button", Value: this.SubmitAction, Options: { value: 'in-progress' }, VisibleIfNotAuthenticated: true }
-        this.Button2 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button2", Type: "button", Value: this.SubmitAction, Options: { value: 'cancelled' }, VisibleIfNotAuthenticated: false }
+        this.Button3 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button3", Type: "button", Value: this.SubmitAction, Options: { value: 'close' }, VisibleIfNotAuthenticated: false }
 
     }
     Error: IModelAttribute;
@@ -36,7 +36,7 @@ export default class ExchangeViewModel extends ViewModel {
     ToCurrency: IModelAttribute;
     // Status: IModelAttribute = { FieldName: "dashboard.exchange.functions.viewDetails.fields.status", Type: "select", Value: '', Options: ['pending' , 'completed' , 'cancelled', ''] };
     Button1: IModelAttribute;
-    Button2: IModelAttribute;
+    Button3: IModelAttribute;
     
     async SubmitAction(params: UpdateExchangeRequest, status?: 'in-progress' | 'cancelled' | 'completed', context?: any): Promise<UpdateExchangeResponse | void> {
         const getResponseFromStatus = (status?: 'in-progress' | 'cancelled' | 'completed') => {
@@ -101,6 +101,7 @@ export default class ExchangeViewModel extends ViewModel {
                             headers: { Authorization: `Bearer ${token.Token}` }
                         }
                         await this.Manager.PostData(notification2);
+                        context.actions.refreshNotifications();
                         //TODO: Notify requester
                         break;
                     }

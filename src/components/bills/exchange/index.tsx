@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import {
     Content,
     StyledModal,
@@ -16,6 +16,7 @@ import AllExchangesViewModel from '../../../models/exchange/allExchangesViewMode
 import ExchangeModel from '../../../models/exchange/exchangeModel';
 import IHttpObject, { ISearchCriteria } from '../../../models/iHttpObject';
 import { ActivityIndicator } from '../../common/loader/activityIndicator';
+import { AppContext } from '../../../services/contextManager';
 
 export interface SearchParametersProps {
     Criteria: Array<ISearchCriteria>;
@@ -32,6 +33,7 @@ export interface SearchParametersProps {
 
 const Exchange: React.FC = () => {
     const { t } = useI18n();
+    const context = useContext(AppContext);
     const [searchParameters, setSearchParameters] = useState<SearchParametersProps>(
         {
             Criteria: [],
@@ -51,6 +53,7 @@ const Exchange: React.FC = () => {
     const [showDetailsModal, setShowDetailsModal] = useState(false);
     const [exchangeModel, setExchangeModel] = useState<ExchangeModel>();
     const [showLoader, setShowLoader] = useState(false);
+    
     const viewExchange = useCallback((record?: ExchangeModel) => {
         setShowDetailsModal(true);
         setExchangeModel(record);
@@ -85,11 +88,11 @@ const Exchange: React.FC = () => {
                 setRecords(recordList)
                 setShowLoader(false);
         },
-        [setCount, viewExchange, setRecords],
+        [searchParameters, setCount, viewExchange],
     )
     useEffect(() => {
         process()
-    }, [])
+    }, [process])
 
     const Submit = async () => {
         await process()

@@ -12,8 +12,10 @@ import { ActivityIndicator } from '../common/loader/activityIndicator';
 import { Direction } from '../common/pager';
 import AllNotificationsRequest from '../../models/notification/allNotificationsRequest';
 import AllNotificationsViewModel from '../../models/notification/allNotificationsViewModel';
+import NotificationViewModel from '../../models/notification/notificationViewModel';
 import IHttpObject, { ISearchCriteria } from '../../models/iHttpObject';
 import NotificationModel from '../../models/notification/notificationModel';
+import UpdateNotificationRequest from '../../models/notification/updateNotificationRequest';
 
 export interface SearchParametersProps {
     Criteria: Array<ISearchCriteria>;
@@ -35,7 +37,7 @@ const NotificationDashboard: React.FC = () => {
             Criteria: [],
             page: 0,
             count: 0,
-            pageSize: 10,
+            pageSize: 100,
             sort: 'createdAt',
             direction: Direction.asc,
             searchBarItem: '',
@@ -48,8 +50,12 @@ const NotificationDashboard: React.FC = () => {
     const [activeNotification, setActiveNotification] = useState<NotificationModel>();
     const [showLoader, setShowLoader] = useState(false);
     const { t } = useI18n();
-    const viewNotification = useCallback((record?: NotificationModel) => {
+    const viewNotification = useCallback(async (record?: NotificationModel) => {
+        await new NotificationViewModel(record?? new NotificationModel())
+        .SubmitAction(new UpdateNotificationRequest(record?? new NotificationModel()), 'read')
         setActiveNotification(record);
+        context.actions.refreshNotifications();
+        context.actions.test();
     }, [])
     const GetAllNotifications = useCallback(async () => {
         setShowLoader(true)
