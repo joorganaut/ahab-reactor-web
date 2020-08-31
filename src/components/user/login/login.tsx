@@ -1,13 +1,17 @@
 import React from 'react';
 import { Form } from '../../../components/common/form/';
 import { FormSection } from '../../../components/common/container/'
-import { GoogleButton, FacebookButton } from '../../../components/common/button/';
+import { GoogleButton, GoogleButtonX, FacebookButton } from '../../../components/common/button/';
 import LoginViewModel from '../../../models/user/login/loginViewModel';
 import LoginModel from '../../../models/user/login/loginModel';
 import BasePage from './../../common/page/basePage';
 import { LogoMedium } from '../../common/logo/';
 import styled from 'styled-components/macro';
 import { withTranslation, WithTranslation } from 'react-i18next';
+import LoginRequest from '../../../models/user/login/loginRequest';
+import {AppContext} from '../../../services/contextManager';
+import GoogleLoginRequest from '../../../models/user/login/googleLoginRequest';
+
 const LoginWrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -38,7 +42,7 @@ const LoginFormWrapper = styled.div`
     border-radius: 15px;
     margin: 20px;
     opacity: 80%;   
-    width: 50%;
+    /* width: 50%; */
     justify-self: center;
     background-color: ${props => props.theme.colors.background};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -72,13 +76,49 @@ interface LoginProps extends WithTranslation {
 
 }
 class Login extends BasePage<LoginProps, any>{
+    constructor(props: any){
+        super(props);
+        this.Submit = this.Submit.bind(this);
+    }
     componentDidMount() {
         this.setState({ IsLoading: false, LoadingTitle: 'Loading' });
     }
-
+    async Submit(res: any) {
+        debugger
+        let e: MouseEvent = new MouseEvent('click');
+        e.preventDefault();
+        await this.signinWithGoogle(e, res);
+    }
+    signinWithGoogle = async (e: any, res: any) => {
+        debugger
+        const viewModel: LoginViewModel = new LoginViewModel(new LoginModel());
+        const request: GoogleLoginRequest = new GoogleLoginRequest(new LoginModel({
+            LoginUsername: res.email,
+            Password: 'string',
+            FirstName: res.FirstName,
+            LastName: res.LastName
+        }))
+        const response = await viewModel.SigninWithGoogle(request, this.context)
+        if (response !== null) {
+            if (response.Code === '00') {
+                this.setState({
+                    Redirect: response.Redirect,
+                    RedirectPath: response.RedirectPath,
+                    RedirectParams: response.Model
+                });
+                await this.alert('Success', response.Message, 'success', () => { });
+                await this.notify('success', response.Message);
+            } else {
+                await this.alert('Info', (response.Message !== undefined ? response.Message : response.Error ? response.Error : 'Unable to get info'), 'info', () => { });
+                this.notify('info', (response.Message !== undefined ? response.Message : response.Error))
+            }
+        } else {
+            await this.alert('Error', 'null response', 'error', () => { });
+            this.notify('error', 'null response')
+        }
+    }
     renderPage = () => {
         return (<>
-
             <LogoMedium />
             <LoginWrapper>
                 <LoginImageWrapper>
@@ -92,7 +132,7 @@ class Login extends BasePage<LoginProps, any>{
                         Model={new LoginModel()}
                         ViewModel={new LoginViewModel(new LoginModel())} >
                         <FormSection>
-                            <GoogleButton signIn={true} loginWithGoogle={() => { }} />
+                            <GoogleButtonX signIn={true} loginWithGoogle={this.Submit} />
                         </FormSection>
                         <FormSection>
                             <FacebookButton signIn={true} loginWithFacebook={() => { }} />
@@ -113,4 +153,5 @@ class Login extends BasePage<LoginProps, any>{
         </>)
     }
 }
+Login.contextType = AppContext;
 export default withTranslation()(Login);

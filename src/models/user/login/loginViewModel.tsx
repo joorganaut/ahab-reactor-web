@@ -1,6 +1,8 @@
 import { ViewModel, IModelAttribute } from "../../iModel";
 import LoginRequest from "./loginRequest";
 import LoginResponse from "./loginResponse";
+import GoogleLoginRequest from "./googleLoginRequest";
+import GoogleLoginResponse from "./googleLoginResponse";
 import LoginModel from "./loginModel";
 import MiddlewareManager from "../../../services/middlewareManager";
 
@@ -53,5 +55,48 @@ export default class LoginViewModel extends ViewModel {
             response.Error = e.message;
             return response;
         }
+    };
+
+    async SigninWithGoogle(params: GoogleLoginRequest, context?: any): Promise<GoogleLoginResponse> {
+        this.Manager = new MiddlewareManager();
+        let response: GoogleLoginResponse;
+        try {
+            let data: LoginModel = params.Model !== undefined ? params?.Model[0] : {}
+            data.InstitutionCode = '202062418221';
+            let request = new GoogleLoginRequest(data);
+            console.log(JSON.stringify(request))
+
+            let res = await this.Manager.PostData(request);
+            response = new GoogleLoginResponse(res);
+            if (!ViewModel.IsNullOrUndefined(response)) {
+                switch (response.Code) {
+                    case '00': {
+                        context.actions.setAuthDetails(response.UserModel.ID?.toString()?? '', response.RedirectParams);
+                        response.Message = 'Welcome';
+                        response.Redirect = true;
+                        response.RedirectPath = '/dashboard';
+                        break;
+                    }
+                    case 'AE': {
+                        response.Message = 'Invalid Login Credentials';
+                        break;
+                    }
+                    default: {
+                        response.Message = 'Something terrible happened';
+                        break;
+                    }
+                }
+
+                return response;
+            } else {
+                response = new LoginResponse();
+                response.Error = 'Null response from Middleware';
+            }
+        } catch (e) {
+            response = new LoginResponse();
+            response.Error = e.message;
+            return response;
+        }
+        return response;
     };
 }

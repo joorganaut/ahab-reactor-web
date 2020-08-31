@@ -39,7 +39,7 @@ const NotificationDashboard: React.FC = () => {
             count: 0,
             pageSize: 100,
             sort: 'createdAt',
-            direction: Direction.asc,
+            direction: Direction.desc,
             searchBarItem: '',
             SetCount: (e: number) => { },
             ToString: () => { return null },
@@ -64,14 +64,14 @@ const NotificationDashboard: React.FC = () => {
         const viewModel = new AllNotificationsViewModel(searchParams)
         let r = await viewModel.SubmitAction(searchParams);
         let model = r.Model;
-        model = model?.sort((a, b) => {
-            if ((a?.DateCreated?? new Date()) > (b?.DateCreated?? new Date()))
-                return 1
-            if ((a?.DateCreated?? new Date()) < (b?.DateCreated?? new Date()))
-                return 0
-            else
-                return -1
-        })
+        // model = model?.sort((a, b) => {
+        //     if ((a?.DateCreated?? new Date()) > (b?.DateCreated?? new Date()))
+        //         return 1
+        //     if ((a?.DateCreated?? new Date()) < (b?.DateCreated?? new Date()))
+        //         return 0
+        //     else
+        //         return -1
+        // })
         model?.forEach(element => {
             let n: NotificationModel = new NotificationModel(element);
             let row: NotificationListItemProps = {
