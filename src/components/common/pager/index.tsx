@@ -100,7 +100,7 @@ const Pager: React.FC<PagerProps> = ({ ...props }) => {
                     </PagerDirectionButton>
             </PagerSortContainer>
             <PageNumber>{`page ${props.page + 1} of ${getTotalPages()}`}</PageNumber>
-            <PageSize>{`showing ${(props.page * props.pageSize) + 1} to
+            <PageSize>{`showing ${(props.page * props.pageSize) + 1} - 
              ${(props.page * props.pageSize) + props.pageSize < props.count ? (props.page * props.pageSize) + props.pageSize : props.count} of `}</PageSize>
             <Count>{props.count}</Count>
         </PagerContainer>

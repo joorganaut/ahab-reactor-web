@@ -63,7 +63,7 @@ const NotificationDashboard: React.FC = () => {
         let criteria = {fieldName: 'Recipient', fieldValue : auth.Model.UserModel.ID};
         let search = searchParameters;
         search.Criteria.push(criteria);
-        search.Criteria.push({fieldName: 'Status', fieldValue : 'unread'});
+        // search.Criteria.push({fieldName: 'Status', fieldValue : 'unread'});
         let notifications: NotificationListItemProps[] = [];
         let searchParams = new AllNotificationsRequest(search);
         const viewModel = new AllNotificationsViewModel(searchParams)

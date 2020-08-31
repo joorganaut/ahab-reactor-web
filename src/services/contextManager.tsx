@@ -62,7 +62,6 @@ export default class ContextManager extends React.Component<ContextManagerProps,
         let searchParams = new AllNotificationsRequest({
             Criteria: [
                 {fieldName : 'Status', fieldValue: 'unread'},
-                {fieldName: 'Recipient', fieldValue : this.getAuthDetails().Model.UserModel.ID},
             ],
             page: 0,
             pageSize: 100,
