@@ -4,10 +4,10 @@ import useI18n from '../../../hooks/useI18n';
 const OutlineButton = styled.button`
   font-family: ${(props) => props.theme.fonts.primary};
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.45rem;
 
-  border-radius: 6px;
-  padding: 10px 30px;
+  border-radius: 5px;
+  margin: 10px 10px;
   border: 1px solid transparent;
 
   &:active {
@@ -33,18 +33,19 @@ const Icon = styled.img`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
+  background-color: ${props => props.theme.colors.white}
 `
 
 const Text = styled.div`
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: 0.65rem;
+  line-height: 1.2;
   display: inline-flex;
 `
 export const GoogleButton: React.FC<{signIn: boolean, loginWithGoogle: (e: any)=>void}> = ({ signIn, loginWithGoogle }) => {
   const { t } = useI18n();
-  const buttonText = signIn ? t('auth.google.signIn') : t('auth.google.signUn')
+  const buttonText = signIn ? t('auth.google.signIn') : t('auth.google.signUp')
   return (
     <OutlineButton onClick={loginWithGoogle}>
       <IconContainer>

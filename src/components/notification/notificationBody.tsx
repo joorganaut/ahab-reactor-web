@@ -7,7 +7,8 @@ import {
     NotificationFooterIcon,
     NotificationListItemSenderDate,
     NotificationFooterName,
-    NotificationBodyMain
+    NotificationBodyMain,
+    NotificationBodyMainEmpty
 } from './styled';
 import { WelcomeNotification, AddTransactionNotification, AcceptNotification } from './templates'
 import NotificationModel from '../../models/notification/notificationModel';
@@ -62,6 +63,9 @@ const NotificationBody: React.FC<NotificationBodyProps> = ({ ...props }) => {
             </NotificationBodyMain>
         </>
     }
-    return (<NotificationBodyMain>Please select a message</NotificationBodyMain>)
+    return (<NotificationBodyMainEmpty>
+        <div></div>
+        Please select a message
+        </NotificationBodyMainEmpty>)
 }
 export default NotificationBody;

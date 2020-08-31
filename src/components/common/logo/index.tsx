@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components/macro';
 
 const Container = styled.div<{width:string}>`
-margin: 20px;
-padding: 20px;
+margin: 0px 20px 0 20px;
+padding: 0px 20px 0 20px;
 position: relative;
 border: none;
 border-width: 2px;

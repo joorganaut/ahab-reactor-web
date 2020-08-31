@@ -46,6 +46,12 @@ export default class ContextManager extends React.Component<ContextManagerProps,
     test(){
         this.setState({Test : this.state.Test + 1})
     }
+    contextRefreshCallBack=()=>{
+        setInterval(()=>{
+            this.refreshNotifications();
+            this.contextRefreshCallBack();
+        }, 100000)
+    }
     refreshNotifications = async () => {
         await this.componentDidMount();
     }
@@ -65,6 +71,7 @@ export default class ContextManager extends React.Component<ContextManagerProps,
         const viewModel = new AllNotificationsViewModel(searchParams)
         let r = await viewModel.SubmitAction(searchParams);
         this.setState({ Notifications : r.Model?.length?? 0});
+        // this.refreshNotifications();
     }
     render() {
         return (

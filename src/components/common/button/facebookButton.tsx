@@ -5,10 +5,10 @@ import useI18n from '../../../hooks/useI18n'
 const OutlineButton = styled.button`
   font-family: ${(props) => props.theme.fonts.primary};
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.45rem;
 
-  border-radius: 6px;
-  padding: 10px 30px;
+  border-radius: 5px;
+  margin: 10px 10px;
   border: 1px solid transparent;
 
   &:active {
@@ -34,19 +34,19 @@ const Icon = styled.img`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  height: 16px;
-  width: 16px;
+  height: 12px;
+  width: 12px;
   background-color: ${props => props.theme.colors.banner2}
 `
 
 const Text = styled.div`
-  font-size: 0.75rem;
-  line-height: 1.4;
+  font-size: 0.65rem;
+  line-height: 1.2;
   display: inline-flex;
 `
 export const FacebookButton: React.FC<{signIn: boolean, loginWithFacebook: (e: any)=>void}> = ({ signIn, loginWithFacebook }) => {
   const { t } = useI18n();
-  const buttonText = signIn ? t('auth.facebook.signIn') : t('auth.facebook.signIn')
+  const buttonText = signIn ? t('auth.facebook.signIn') : t('auth.facebook.signUp')
   return (
     <OutlineButton onClick={loginWithFacebook}>
       <IconContainer>

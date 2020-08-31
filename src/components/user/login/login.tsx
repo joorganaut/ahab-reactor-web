@@ -26,6 +26,7 @@ const LoginWrapper = styled.div`
 const LoginImageWrapper = styled.div`
         width: auto;
         margin: 20px 20px 20px 20px;
+        justify-self: center;
         @media screen and (max-width: ${props => props.theme.breakpoints.small}){
         display: none;
     }
@@ -37,7 +38,8 @@ const LoginFormWrapper = styled.div`
     border-radius: 15px;
     margin: 20px;
     opacity: 80%;   
-    width: fit-content;
+    width: 50%;
+    justify-self: center;
     background-color: ${props => props.theme.colors.background};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
@@ -54,7 +56,7 @@ grid-template-rows: 1fr 1fr;
 color: ${props => props.theme.colors.primary};
 text-decoration: none;
 /* left: 25%;*/
-bottom: 10px; 
+bottom: 0px; 
 width: 100%;
 margin: auto;
 position: relative;

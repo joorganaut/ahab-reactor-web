@@ -44,6 +44,16 @@ border-radius: 6px;
 padding: 15px;
 color: ${props => props.theme.colors.banner1}
 `
+
+export const NotificationBodyMainEmpty = styled.div`
+background-color: ${props => props.theme.colors.white};
+border-radius: 6px;
+padding: 15px;
+font-size: 24px;
+font-weight: 900;
+text-align: center;
+color: ${props => props.theme.colors.banner1}
+`
 export const NotificationBodyHeader = styled.div`
 background-color: ${props => props.theme.colors.white};
 display: grid;
