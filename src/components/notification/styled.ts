@@ -94,7 +94,7 @@ grid-template-rows: 1fr 0.8fr 0.5fr;
 padding: 15px;
 background-color: ${props => props.theme.colors.background};
 border-radius: 6px;
-height: 120px;
+height: auto;
 &:hover {
     transform: scale(1.01); 
     transition: all .2s ease-in-out;

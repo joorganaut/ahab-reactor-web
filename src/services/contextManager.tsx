@@ -59,9 +59,11 @@ export default class ContextManager extends React.Component<ContextManagerProps,
         return this.state.Notifications;
     }
     componentDidMount = async ()=>{
+        const auth = this.getAuthDetails();
         let searchParams = new AllNotificationsRequest({
             Criteria: [
                 {fieldName : 'Status', fieldValue: 'unread'},
+                {fieldName : 'Recipient', fieldValue: auth.Model.UserModel.ID},
             ],
             page: 0,
             pageSize: 100,
