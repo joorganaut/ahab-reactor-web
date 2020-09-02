@@ -120,7 +120,7 @@ class DetailForm extends BasePage<DetailFormProps, any> {
                     <ButtonContainer>
                         {ObjectProcessor.GetProperties(this.state.ViewModel).filter(x => x.includes('Button')).map((b: string) => {
                             return (
-                                <Button disabled={!this.ShowOnAuthentication(this.state.ViewModel[b].VisibleIfNotAuthenticated)} name={b} type="primary" onClick={(e: any)=>{this.setState({currentAction: b}); this.Submit(e)}}>
+                                <Button disabled={!this.state.ViewModel[b].VisibleIfNotAuthenticated} name={b} type="primary" onClick={(e: any)=>{this.setState({currentAction: b}); this.Submit(e)}}>
                                     {this.props.t(this.state.ViewModel[b].FieldName)}
                                 </Button>
                             )

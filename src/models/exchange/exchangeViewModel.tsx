@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { ViewModel, IModelAttribute } from "../iModel";
 import ExchangeModel from "./exchangeModel";
 import MiddlewareManager from "../../services/middlewareManager";
@@ -5,6 +6,8 @@ import UpdateExchangeRequest from "./updateExchangeRequest";
 import UpdateExchangeResponse from "./updateExchangeResponse";
 import AddNotificationRequest from "../notification/addNotificationRequest";
 import NotificationModel from "../notification/notificationModel";
+import { AppContext } from '../../services/contextManager';
+
 export default class ExchangeViewModel extends ViewModel {
     constructor(props: ExchangeModel) {
         super(props);
@@ -23,7 +26,7 @@ export default class ExchangeViewModel extends ViewModel {
             FieldName: "dashboard.exchange.functions.viewDetails.fields.toCurrency", Type: "text", Value: props.ToCurrency
         };
         this.Button1= { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button1", Type: "button", Value: this.SubmitAction, Options: { value: 'in-progress' }, VisibleIfNotAuthenticated: true }
-        this.Button3 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button3", Type: "button", Value: this.SubmitAction, Options: { value: 'close' }, VisibleIfNotAuthenticated: false }
+        this.Button3 = { FieldName: "dashboard.exchange.functions.viewDetails.fields.buttons.button3", Type: "button", Value: this.SubmitAction, Options: { value: 'close' }, VisibleIfNotAuthenticated: this.GetAuthStatus(props.RequesterUserID) }
 
     }
     Error: IModelAttribute;
@@ -37,7 +40,12 @@ export default class ExchangeViewModel extends ViewModel {
     // Status: IModelAttribute = { FieldName: "dashboard.exchange.functions.viewDetails.fields.status", Type: "select", Value: '', Options: ['pending' , 'completed' , 'cancelled', ''] };
     Button1: IModelAttribute;
     Button3: IModelAttribute;
-    
+    GetAuthStatus = (id?: number) => {
+        const context = useContext(AppContext);
+        const auth = context.actions.getAuthDetails();
+        const result: boolean = id === auth.Model.UserModel.ID;
+        return result;
+    }
     async SubmitAction(params: UpdateExchangeRequest, status?: 'in-progress' | 'cancelled' | 'completed', context?: any): Promise<UpdateExchangeResponse | void> {
         const getResponseFromStatus = (status?: 'in-progress' | 'cancelled' | 'completed') => {
             switch(status){

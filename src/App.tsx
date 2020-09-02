@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components/macro';
 import { theme, GlobalStyle } from './styles/global';
 import { Router } from './routes';
 import { ModalProvider } from 'styled-react-modal';
-import ContextManager from './services/contextManager'
+import ContextManager from './services/contextManager';
+
 function App() {
   return (
     <ContextManager>

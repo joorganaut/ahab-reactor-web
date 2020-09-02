@@ -8,6 +8,7 @@ import { Wrapper} from '../container/';
 import { WithTranslation } from 'react-i18next';
 import DialogNotification from '../notification/dialogNotification';
 import { AppContext } from '../../../services/contextManager';
+import Spinner, { SpinnerName } from '../../common/loader/';
 
 class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
     manager: MiddlewareManager;
@@ -40,7 +41,9 @@ class BasePage<T = WithTranslation, U = any> extends React.Component<T, any>{
      }
      renderLoading=()=>{
         return(
-            <ActivityIndicator show={this.state.IsLoading} title={this.state.LoadingTitle} />
+            // <ActivityIndicator show={this.state.IsLoading} title={this.state.LoadingTitle} />
+            
+            <Spinner name={SpinnerName.Orbit} show={this.state.IsLoading}/>
         )
     }
     async notify(type: string, word?: string){

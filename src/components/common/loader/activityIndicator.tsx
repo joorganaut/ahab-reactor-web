@@ -19,7 +19,9 @@ const toggleIndicator = (show: boolean, title: string) => {
         return (<>
             <Center>
                 {/* <Sentry color={theme.colors.brand} size={32} speed={1} animating={this.state.Show} /> */}
-                <MainLevels size={100} frontColor={theme.colors.primary} backColor={theme.colors.compliment} loading={show} />
+                <MainLevels size={100} 
+                frontColor={theme.colors.primary} 
+                backColor={theme.colors.compliment} loading={show} />
                 {title}.....
             </Center>
         </>)
