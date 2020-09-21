@@ -33,12 +33,10 @@
     "react-scripts": "^3.4.3",
     "react-spinners-kit": "^1.9.1",
     "react-spring": "^8.0.27",
-    "react-styled-sidebar": "0.0.3",
     "react-toastify": "^6.0.8",
     "serve": "^11.3.2",
     "styled-components": "^5.2.0",
     "styled-react-modal": "^2.0.1",
-    "stylus": "^0.54.8",
     "typescript": "^3.9.7"
   },
   "scripts": {
