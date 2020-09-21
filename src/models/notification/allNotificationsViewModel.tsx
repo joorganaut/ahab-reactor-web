@@ -3,11 +3,7 @@ import AllNotificationsRequest from "./allNotificationsRequest";
 import AllNotificationsResponse from "./allNotificationsResponse";
 import NotificationModel from "./notificationModel";
 import MiddlewareManager from "../../services/middlewareManager";
-const datePlus = (days?: number) => {
-    let result = new Date();
-    result.setDate(new Date().getDate() + (days ? days : 1))
-    return result.toISOString().split('T')[0]
-}
+
 export default class AllNotificationsViewModel extends ViewModel {
     Records: NotificationModel[] = [];
     constructor(props: AllNotificationsRequest) {

@@ -66,7 +66,9 @@ class DetailForm extends BasePage<DetailFormProps, any> {
                 });
                 await this.alert('Success', response.Message, 'success', () => { });
                 await this.notify('success', response.Message);
-                const v = this.props.onSuccess !== undefined ? this.props.onSuccess(e) : () => { };
+                if(this.props.onSuccess !== undefined ){
+                    this.props.onSuccess(e)
+                }
             } else {
                 await this.alert('Info', (response.Message !== undefined ? response.Message : response.Error ? response.Error : 'Unable to get info'), 'info', () => { });
                 this.notify('info', (response.Message !== undefined ? response.Message : response.Error))

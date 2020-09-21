@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {
     SocialTableContainer,
     SocialTableRowContainer,
@@ -9,13 +9,7 @@ import {
     AmountAndRateContainer,
     Amount,
     Rate,
-    ContactContainer,
-    Mobile,
-    Email,
-    NameContainer,
     Clock,
-    ViewButtonContainer,
-    ViewButton,
     ViewLink
 } from './styled';
 import Countdown from "react-countdown";

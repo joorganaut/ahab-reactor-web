@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from "styled-components/macro";
 import { useSpring, animated, config } from "react-spring";
 import Brand from "./brand";
@@ -25,7 +25,7 @@ const Navbar = (props: any) => {
   });
   const { t } = useI18n();
   const history = useHistory();
-  const [id, setID] = useState(props.id);
+  const id = props.id;
   const onLogout = (e: any): void => {
     props.context.actions.setAuthDetails(id, null);
     history.push('/')

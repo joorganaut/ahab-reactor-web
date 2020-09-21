@@ -65,7 +65,7 @@ const Exchange: React.FC = () => {
             x.count = count;
         }
         setSearchParameters(x);
-    }, [])
+    }, [searchParameters])
     const process = useCallback(
         async () => {
             setShowLoader(true)
@@ -92,7 +92,7 @@ const Exchange: React.FC = () => {
             setRecords(recordList)
             setShowLoader(false);
         },
-        [searchParameters, setCount, viewExchange],
+        [context.actions, searchParameters, setCount, viewExchange],
     )
     useEffect(() => {
         process()

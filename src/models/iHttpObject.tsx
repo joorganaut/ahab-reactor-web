@@ -46,7 +46,7 @@ export class SearchResult implements ISearchResult{
     Code: string = '';
     Message: string = '';
     Error?: string | undefined;
-    constructor(props: any){
+    constructor(props?: any){
         this.Code = props === undefined ? '' : props.Code;
         this.Message = props === undefined ? '' : props.Message;
         this.Model = props === undefined ? {} : props.Model;

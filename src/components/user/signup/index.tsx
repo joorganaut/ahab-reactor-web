@@ -36,14 +36,7 @@ const LoginWrapper = styled.div`
         left: -6%;
     }
     `
-const LoginImageWrapper = styled.div`
-        width: 100%;
-        max-height: 100%;
-        margin: 40px;
-        @media screen and (max-width: ${props => props.theme.breakpoints.small}){
-        display: none;
-    }
-    `
+
 const LoginFormWrapper = styled.div`
     border: solid;
     border-width: 2px;
@@ -56,10 +49,6 @@ const LoginFormWrapper = styled.div`
     background-color: ${props => props.theme.colors.background};
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
-const LoginImage = styled.img`
-        width: 100%;
-        /* opacity: 85%; */
-    `
 const LoginForm = styled(Form)`
 color: ${props => props.theme.colors.primary};
 `

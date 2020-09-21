@@ -1,8 +1,6 @@
 import React, { createContext } from 'react';
-import { NotificationListItemProps } from '../components/notification/notificationListItem';
 import AllNotificationsRequest from '../models/notification/allNotificationsRequest';
 import AllNotificationsViewModel from '../models/notification/allNotificationsViewModel';
-import NotificationModel from '../models/notification/notificationModel';
 import { Direction } from '../components/common/pager';
 
 interface ContextProps {

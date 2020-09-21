@@ -22,7 +22,6 @@ import Exchange from '../bills/exchange';
 import NotificationDashboard from '../notification';
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { AppContext } from '../../services/contextManager';
-import { CallDialog, Contact } from '../common/callDialog'
 
 interface DashBoardProps extends WithTranslation {
     open: boolean

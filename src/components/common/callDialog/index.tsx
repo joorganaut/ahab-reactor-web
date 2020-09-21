@@ -1,14 +1,10 @@
-import React, { useState, useCallback, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Button } from '../button'
 import TextField from '@material-ui/core/TextField'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControl from '@material-ui/core/FormControl'
-import InputLabel from '@material-ui/core/InputLabel'
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
 import { CallButtonContainer } from './callIcon'
 import useI18n from '../../../hooks/useI18n'
 import { AppContext } from '../../../services/contextManager'
@@ -26,18 +22,6 @@ interface CallDialogProps {
     open: boolean
     handleClose: () => void
 }
-
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 120
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2)
-        }
-    })
-)
 
 export const CallDialog: React.FC<CallDialogProps> = (props) => {
     const { t } = useI18n()
