@@ -82,6 +82,19 @@
         "FN-9999": "Something went wrong. Please contact support with error code: FN-9999"
       }
     },
+    "contacts": {
+      "title": "Contacts",
+      "add_contact": "Add Contact",
+      "call":{
+        "title": "Hi contactFirstName!! Let's Chat",
+        "body": "You've been invited to a call with {{firstName}}. Click on the link below to enter the call",
+        "start": "Start a call",
+        "contactMethod": "Select a method of contact",
+        "email": "Email",
+        "phone": "Phone",
+        "cancel": "Cancel"
+      }
+    },
     "productTypes": {
       "life": "Life",
       "critical": "Critical Illness",

@@ -14,8 +14,6 @@ export default class MiddlewareManager {
                 });
             } catch (e) {
                 result.Error = e.message;
-            } finally{
-                
             }
             return result;
         }
@@ -46,6 +44,20 @@ export default class MiddlewareManager {
             }
             return result;//new Promise<U>(()=>);
         }
+        GetSingleData = async (request: T): Promise<U> => {
+            let result: U;
+            result = {} as U;
+            try {
+                const id = request.Model? request.Model[0].ID?? 0 : 0
+                await axios.get(request.Url === undefined ? '' : request.Url + request.Method + '/' + id.toString(), 
+                request.Config === undefined ? null : request.Config).then(r=>{
+                    result = r.data;
+                });
+            } catch (e) {
+                result.Error = e.message;
+            }
+            return result;//new Promise<U>(()=>);
+        }
         DeleteData = async (request: T): Promise<U> => {
             let result: U;
             result = {} as U;
@@ -60,7 +72,7 @@ export default class MiddlewareManager {
 
         BuildGetQuery = (request: V): string => {
             let result: string = '';
-            request.Criteria.map(x=>{
+            request.Criteria.forEach(x=>{
                 result+= x.fieldName + '=' + x.fieldValue + '&';
             })
             result+= 'Sort='+request.sort + '&';

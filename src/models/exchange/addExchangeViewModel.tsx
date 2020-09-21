@@ -31,11 +31,11 @@ export default class AddExchangeViewModel extends ViewModel {
     };
     FromCurrency: IModelAttribute = {
         FieldName: "dashboard.exchange.functions.viewDetails.fields.fromCurrency", Type: "select", Value: '',
-        Options: [{ key: 'ngn', value: 'ngn' }, { key: 'cad', value: 'cad' }, { key: 'usd', value: 'usd' }]
+        Options: [{ key: 'ngn', value: 'ngn' }, { key: 'cad', value: 'cad' }, { key: 'usd', value: 'usd' }, { key: 'gbp', value: 'gbp' }, { key: 'eur', value: 'eur' }]
     };
     ToCurrency: IModelAttribute = {
         FieldName: "dashboard.exchange.functions.viewDetails.fields.toCurrency", Type: "select", Value: '',
-        Options: [{ key: 'ngn', value: 'ngn' }, { key: 'cad', value: 'cad' }, { key: 'usd', value: 'usd' }]
+        Options: [{ key: 'ngn', value: 'ngn' }, { key: 'cad', value: 'cad' }, { key: 'usd', value: 'usd' }, { key: 'gbp', value: 'gbp' }, { key: 'eur', value: 'eur' }]
     };
     // Status: IModelAttribute = { FieldName: "dashboard.exchange.functions.viewDetails.fields.status", Type: "select", Value: '', Options: ['pending' , 'completed' , 'cancelled'] };
     Button: IModelAttribute = { FieldName: "dashboard.exchange.functions.add.fields.buttons.button1", Type: "button", Value: this.SubmitAction }

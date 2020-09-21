@@ -37,11 +37,13 @@ const NotificationBody: React.FC<NotificationBodyProps> = ({ ...props }) => {
         const getBody = (model: NotificationModel) => {
             switch (model?.Template) {
                 case 'add-xchange':
-                    return (<AddTransactionNotification name={getName(props.Model?.Recipient)} message={props.Model?.Body} />)
+                    return (<AddTransactionNotification name={getName(props.Model?.Recipient)} model={props.Model} />)
                 case 'approval-request-sender':
-                    return (<AcceptNotification name={getName(props.Model?.Recipient)} message={props.Model?.Body} />)
+                    return (<AcceptNotification name={getName(props.Model?.Recipient)} model={props.Model} />)
+                case 'approval-request':
+                    return (<AcceptNotification name={getName(props.Model?.Recipient)} model={props.Model} />)
                 default:
-                    return (<WelcomeNotification name={getName(props.Model?.Recipient)} message={props.Model?.Body} />)
+                    return (<WelcomeNotification name={getName(props.Model?.Recipient)} model={props.Model} />)
             }
         }
         return <>

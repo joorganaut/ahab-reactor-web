@@ -22,6 +22,7 @@ import Exchange from '../bills/exchange';
 import NotificationDashboard from '../notification';
 import { withTranslation, WithTranslation } from 'react-i18next';
 import { AppContext } from '../../services/contextManager';
+import { CallDialog, Contact } from '../common/callDialog'
 
 interface DashBoardProps extends WithTranslation {
     open: boolean
@@ -37,7 +38,8 @@ class DashBoard extends BasePage<DashBoardProps, any> {
             open: false,
             isModalOpen: false,
             urlQuery: path[path.length - 1],
-            background: undefined
+            background: undefined,
+            dialogOpen: false
         }
         this.Content = (<></>);
     }
@@ -110,7 +112,6 @@ class DashBoard extends BasePage<DashBoardProps, any> {
                         </Banner>
 
                         <Navbar name={this.getName(actions)} context={actions} id={this.getID(actions)} />
-
                         <SideNav open={this.state.open}>
                             <SideNavMenu className="sidenav">
                                 <SideNavCloseButton onClick={(e: any) => this.setState({ open: !this.state.open })} ></SideNavCloseButton>

@@ -5,6 +5,7 @@ import { theme, GlobalStyle } from './styles/global';
 import { Router } from './routes';
 import { ModalProvider } from 'styled-react-modal';
 import ContextManager from './services/contextManager';
+import MagnifiWidget from './components/common/magnifi/magnifiWidget'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <ModalProvider>
         <GlobalStyle />
         <Router />
+        <MagnifiWidget/>
       </ModalProvider>
     </ThemeProvider>
     </ContextManager>

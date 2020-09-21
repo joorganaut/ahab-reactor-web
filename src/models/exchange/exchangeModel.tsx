@@ -2,6 +2,7 @@ import { Model } from "../iModel";
 
 export default class ExchangeModel extends Model{
     RequesterUserID?: number;
+    AccepterUserID?: number;
     FirstName?: string;
     LastName?: string;
     Amount?: number;
@@ -15,6 +16,7 @@ export default class ExchangeModel extends Model{
     constructor(props?: any){
         super(props);
         this.RequesterUserID = props === undefined ? 0 :  props.RequesterUserID;
+        this.AccepterUserID = props === undefined ? 0 :  props.AccepterUserID;
         this.Amount = props === undefined ? 0 :  props.Amount;
         this.Rate = props === undefined ? 0 : props.Rate;
         this.FirstName = props === undefined ? '' :  props.FirstName;

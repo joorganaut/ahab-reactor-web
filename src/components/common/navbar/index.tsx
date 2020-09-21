@@ -57,7 +57,9 @@ const Navbar = (props: any) => {
         <FlexContainer>
           <Brand />
           <NavLinks style={linkAnimation}>
-              <NameLabel Title={`Hi, ${props.name}`} />
+            <div onClick={props.onPress}>
+            <NameLabel Title={`Hi, ${props.name}`} />
+            </div> 
             <Button name={'logout'} type={'outline'} onClick={(e: any)=>{ confirm(() => {onLogout(e)})}}>
               {t('nav.logout')}
             </Button>

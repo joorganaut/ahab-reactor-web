@@ -101,6 +101,7 @@ const NotificationDashboard: React.FC = () => {
                     Template={x.Template}
                     Summary={x.Summary}
                     Date={x.Date}
+                    key={i}
                     viewAction={x.viewAction}
                 />)
             }))
