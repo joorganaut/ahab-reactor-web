@@ -1,6 +1,6 @@
 import React from 'react';
 import {SpinnerBox} from './styled';
-// import './styled.css';
+import './styled.css';
 
 export enum SpinnerName {
     Circle = 'Circle',
