@@ -23,7 +23,7 @@ interface CallDialogProps {
     handleClose: () => void
 }
 
-export const CallDialog: React.FC<CallDialogProps> = (props) => {
+export const CallDialog: React.FC<CallDialogProps> = ({...props}) => {
     const { t } = useI18n()
     const context = useContext(AppContext)
     
