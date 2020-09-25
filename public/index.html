@@ -42,55 +42,57 @@
 
   <script src="https://widget.magnifi.io/magnifi/js/magnifi.js"></script>
   <script>
-  function loadWidget() {
-    window.magnifi_widget = new Magnifi({
-      settings_url: 'https://widget.magnifi.io/widgets/pnzAEgy4V2P3rARz1i2tJmm9/load_settings',
-      base_url: 'https://widget.magnifi.io',
-      widget_key: 'pnzAEgy4V2P3rARz1i2tJmm9',
-      widget_type: 'call',
-      cable_url: 'wss://widget.magnifi.io/cable',
-      target_container: document.getElementById('widget-container') || document.querySelector('body'),
-      capabilities: [{
-        "call": {
-          "js_class": "CallCapability",
-          "children": []
-        }
-      }, {
-        "link": {
-          "js_class": "LinkCapability",
-          "children": [{
-            "key": "copy_to_clipboard",
-            "js_class": "CopyToClipboardCapability"
-          }, {
-            "key": "open_call_link_in_new_tab",
-            "js_class": "OpenInNewTabCapability"
+    function loadWidget() {
+      window.magnifi_widget = new Magnifi({
+        settings_url: 'https://widget.magnifi.io/widgets/pnzAEgy4V2P3rARz1i2tJmm9/load_settings',
+        base_url: 'https://widget.magnifi.io',
+        widget_key: 'pnzAEgy4V2P3rARz1i2tJmm9',
+        widget_type: 'call',
+        cable_url: 'wss://widget.magnifi.io/cable',
+        target_container: document.getElementById('widget-container') || document.querySelector('body'),
+        organization_access_token: 'QG9m976',
+        capabilities: [{
+          "call": {
+            "js_class": "CallCapability",
+            "children": []
+          }
+        }, {
+          "link": {
+            "js_class": "LinkCapability",
+            "children": [{
+              "key": "copy_to_clipboard",
+              "js_class": "CopyToClipboardCapability"
+            }, {
+              "key": "open_call_link_in_new_tab",
+              "js_class": "OpenInNewTabCapability"
+            }]
+          }
+        }]
+      })
+    }
+
+    function loadMagnifi(params) {
+      debugger
+      MagnifiSdk.organization_member = params.userDetails;
+
+      MagnifiSdk.auto_invites = {
+        contacts: params.contactDetails,
+        email_subject: params.title,
+        message: params.message + '\n {{MeetingLink}}'
+      };
+
+      var capability_hash = {
+        link: {
+          options: {
+            skip_lobby: true
+          },
+          children: [{
+            open_call_link_in_new_tab: {}
           }]
         }
-      }]
-    });
-  }
-
-  function loadMagnifi(params) {
-    MagnifiSdk.organization_member = params.userDetails;
-
-    MagnifiSdk.auto_invites = {
-      contacts: params.contactDetails,
-      email_subject: params.title,
-      message: params.message + '\n {{MeetingLink}}'
-    };
-
-    var capability_hash = {
-      link: {
-        options: {
-          skip_lobby: true
-        },
-        children: [{
-          open_call_link_in_new_tab: {}
-        }]
-      }
-    };
-    MagnifiSdk.capabilityActions.performCapability(window.magnifi_widget, capability_hash);
-  }
+      };
+      MagnifiSdk.capabilityActions.performCapability(window.magnifi_widget, capability_hash);
+    }
   </script>
 </body>
 
